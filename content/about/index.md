@@ -15,4 +15,4 @@ color = "" #color from the theme settings
 +++
 
 Hi,
-Himasnhu is Himanshu Anand, just testing Cloudflare pages.
+This is Himanshu Anand, just testing Cloudflare pages.
