@@ -27,7 +27,7 @@ Our platform is designed with a **community-driven approach**. We value the expe
 
 ### State-of-the-Art Tech
 
-From a technological standpoint, Legally Blocked is a **cutting-edge platform**. It lives entirely on the Cloudflare edge network. We've leveraged [https://pages.cloudflare.com/](Cloudflare Pages) for hosting static content, and we've utilized [https://workers.cloudflare.com/](Cloudflare Workers) for our backend operations, written in Node.js. The database we use is Cloudflare [https://developers.cloudflare.com/d1/](D1), currently in the alpha stage. This project is entirely serverless, requiring no server management, thus delivering a seamless user experience.
+From a technological standpoint, Legally Blocked is a **cutting-edge platform**. It lives entirely on the Cloudflare edge network. We've leveraged [Cloudflare Pages](https://pages.cloudflare.com/) for hosting static content, and we've utilized [Cloudflare Workers](https://workers.cloudflare.com/) for our backend operations, written in Node.js. The database we use is Cloudflare [D1](https://developers.cloudflare.com/d1/), currently in the alpha stage. This project is entirely serverless, requiring no server management, thus delivering a seamless user experience.
 
 ### Together We Grow
 
