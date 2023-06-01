@@ -1,13 +1,14 @@
 +++
 title = "About"
+description: "Himanshu Anand, Cyber Security Researcher, Exploit, Malware, Reverse Engineering"
 date = "2022-11-22T13:10:53Z"
 author = "Himasnhu Anand"
 authorTwitter = "@anand_himanshu" #do not include @
 authorMastadon = "@n00b"
 cover = ""
-tags = ["", ""]
-keywords = ["", ""]
-description = ""
+tags = ["Malware", "Exploit", "Reverse Engineering", "Fuzzing", "Cyber Security", "Research"]
+keywords: ["Malware", "Exploit", "Reverse Engineering", "Fuzzing", "Cyber Security", "Research"]
+description = "Himanshu Anand, Cyber Security Researcher, Exploit, Malware, Reverse Engineering"
 showFullContent = false
 readingTime = false
 hideComments = false
