@@ -54,4 +54,3 @@ As for what's next, we're already working on our next major update. We aim to pr
 
 Best,  
 The Legally Blocked Team
-(Dolly and Himanshu)
