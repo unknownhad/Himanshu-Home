@@ -1,18 +1,17 @@
 +++
-title = "🚀 Introducing Legally Blocked: Your Ultimate Guide to Geo-Blocked Services" 
-date = "2023-05-17T12:10:53Z" 
-author = "Himanshu Anand" 
-authorTwitter = "anand_himanshu"
-cover = "" 
-tags = ["", ""] 
+title = "🚀 Introducing Legally Blocked: Your Ultimate Guide to Geo-Blocked Services"
+date = "2023-05-17T12:10:53Z"
+author = "Himanshu Anand"
+authorTwitter = "anand_himanshu" #do not include @
+cover = ""
+tags = ["Legally Blocked", "Geo-Blocked Services", "Internet Censorship", "Cloudflare", "Serverless"] 
 keywords = ["Legally Blocked", "Geo-Blocked Services", "Internet Censorship", "Cloudflare", "Serverless"] 
 description = "Introducing Legally Blocked, a unique platform offering information about websites, apps, and online services blocked by governments across the globe." 
-showFullContent = false 
-readingTime = false 
-hideComments = false 
-color = "" 
+showFullContent = false
+readingTime = false
+hideComments = false
+color = "" #color from the theme settings
 +++
-
 **Hello everyone!**
 
 🎉 We are extremely excited to announce the launch of our new project, **Legally Blocked**. It's a unique platform providing an invaluable resource for internet users worldwide. 
