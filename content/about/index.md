@@ -8,7 +8,6 @@ authorMastadon = "@n00b"
 cover = "" 
 tags = ["Malware", "Exploit", "Reverse Engineering", "Fuzzing", "Cyber Security", "Research"]
 keywords = ["Malware", "Exploit", "Reverse Engineering", "Fuzzing", "Cyber Security", "Research"]
-description = "Himanshu Anand, Cyber Security Researcher, Exploit, Malware, Reverse Engineering"
 showFullContent = false 
 readingTime = false 
 hideComments = false 
