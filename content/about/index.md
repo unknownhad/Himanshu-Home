@@ -1,16 +1,16 @@
 +++
 title = "About"
-description = "Himanshu Anand, Cyber Security Researcher, Exploit, Malware, Reverse Engineering"
 date = "2022-11-22T13:10:53Z"
-author = "Himanshu Anand"
-authorTwitter = "anand_himanshu" #do not include @ 
-authorMastadon = "@n00b" 
-cover = "" 
-tags = ["Malware", "Exploit", "Reverse Engineering", "Fuzzing", "Cyber Security", "Research"]
-keywords = ["Malware", "Exploit", "Reverse Engineering", "Fuzzing", "Cyber Security", "Research"]
-showFullContent = false 
-readingTime = false 
-hideComments = false 
+author = "Himasnhu Anand"
+authorTwitter = "@anand_himanshu" #do not include @
+authorMastadon = "@n00b"
+cover = ""
+tags = ["", ""]
+keywords = ["", ""]
+description = ""
+showFullContent = false
+readingTime = false
+hideComments = false
 color = "" #color from the theme settings
 +++
 

@@ -1,4 +1,11 @@
-+++ title = "🚀 Introducing Blocked Books: A New Feature on LegallyBlocked" date = "2023-06-08T12:10:53Z" author = "Himanshu Anand" authorTwitter = "@anand_himanshu" #do not include @ cover = "" tags = ["", ""] keywords = ["Legally Blocked", "Geo-Blocked Services", "Internet Censorship", "Books", "Cloudflare", "Serverless"] description = "Introducing Blocked Books: A New Feature on LegallyBlocked." showFullContent = false readingTime = false hideComments = false color = "" #color from the theme settings +++
+---
+title: "🚀 Introducing Blocked Books: A New Feature on LegallyBlocked"
+date: 2023-06-08
+draft: false
+description: "Introducing Blocked Books: A New Feature on LegallyBlocked."
+keywords: ["Legally Blocked", "Geo-Blocked Services", "Internet Censorship", "Books", "Cloudflare", "Serverless"]
+---
+
 
 Hello, readers!
 
@@ -16,4 +23,5 @@ Check out the Blocked Books feature now: http://legallyblocked.website/books
 
 Thank you for being part of our journey towards a more open and accessible internet!
 
-Best, The Legally Blocked Team
+Best,  
+The Legally Blocked Team
