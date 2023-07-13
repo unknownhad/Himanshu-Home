@@ -23,6 +23,9 @@ FriendlyIR is not just an application; it's an ever-evolving tool aimed to equip
 
 Get ready to simplify your cybersecurity information tracking and never miss a crucial update again with FriendlyIR.
 
+The list of currently [tracked sources](https://github.com/unknownhad/FriendlyIR/blob/main/TrackedSources.md).
+Feel free to open a PR directly to track any new source.
+
 Stay safe, stay informed.
 
 PS: Make sure to keep an eye on our upcoming posts for the official Slack approval announcement!
