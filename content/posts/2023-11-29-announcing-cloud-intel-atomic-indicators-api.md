@@ -39,10 +39,10 @@ The API response is a JSON file, listing all observed malicious IP addresses wit
 ]
 ```
 
-##Current Focus and Future Developments
+## Current Focus and Future Developments
 Currently, our API covers malicious IP addresses. We are actively working on extending its capabilities to include malware object detection.
 
-##Get Your Free API Key
+## Get Your Free API Key
 Interested in using our API? Email us at me@himanshuanand.com to request your free API key. If you have any specific requirements or feature requests, feel free to open an [issue](https://github.com/unknownhad/AWSAttacks/issues) on our GitHub page.
 
 Join us in this journey towards a more secure digital world!
