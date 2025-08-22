@@ -90,7 +90,7 @@ curl -X POST "https://redacted.example/send-email" \
   ```
   Note: All identifiers and endpoints are redacted. The goal is to highlight the pattern, not to point at a live system.
 
-![Email Recieved in my inbox](./images/email-inbox.png)
+![Email Recieved in my inbox](./email-inbox.png)
 
   Reporting the Bug
 I reported it to the hosting provider; since the vulnerable app was third-party code hosted on their platform, it was understandably out of scope.
