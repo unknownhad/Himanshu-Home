@@ -92,7 +92,6 @@ curl -X POST "https://redacted.example/send-email" \
 ![Email Recieved in my inbox](./images/email-inbox.png)
 
   Reporting the Bug
-![Bug reporting screenshot](./images/bug-report.png)
 I reported it to the hosting provider; since the vulnerable app was third-party code hosted on their platform, it was understandably out of scope.
 
 The real risk here isn't theoretical:
