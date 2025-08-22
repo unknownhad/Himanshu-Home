@@ -1,3 +1,4 @@
+---
 title: "Why Relying on LLMs for Code Can Be a Security Nightmare"
 date: 2025-08-22T09:00:00+01:00
 draft: false
