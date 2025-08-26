@@ -104,9 +104,7 @@ They could target the app's customers with convincing messages.
 They could target the organization itself by spoofing trusted senders.
 The Bigger Point
 
-The takeaway isn't about bug bounties. It's this:
-   LLM generated code is not security-aware by default.
-   LLMs do NOT understand business risk, which you do.
-   If you ship AI written examples as it is you may be exposing real attack surface.
+The takeaway isn't about bug bounties, it is baout knowing that LLM generated code is not security aware. LLMs do NOT understand business risk and If you ship AI written examples as it is you may be exposing real attack surface.
 
-LLMs are helpful assistants but they are NOT security engineers. Keep humans in the loop for threat modeling, abuse case thinking and defensive design. Otherwise, you might end up shipping an app that can be abused with a single curl command.
+
+LLMs are helpful assistants but they are NOT really understand the need. Keep humans in the loop for threat modeling, abuse cases thinking and defense design. Else you might end up shipping an app that can be abused with a single curl command.
