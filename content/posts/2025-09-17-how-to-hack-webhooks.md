@@ -44,10 +44,10 @@ This part is the fun bit for threat hunters. you can use internet search engines
 
 ![Fofa Search for Discord webhook](/images/discord-webhook.png)
 
-keep in mind public counts are a signal not a final verdict. many results will be benign or intentionally public. use additional context to prioritise targets such as where the webhook appears what page triggers it and whether the surrounding code reveals internal workflows
+Keep in mind public counts are a signal not a final verdict. many results will be benign or intentionally public. use additional context to prioritise targets such as where the webhook appears what page triggers it and whether the surrounding code reveals internal workflows
 
 ## From a pentester and bug hunter perspective
-when you find a webhook used to trigger a pipeline that alone is a useful hint. that hint can lead to blind code injection reflected XSS or other issues depending on how the pipeline uses data. sometimes it is low noise and high payoff. kinda fun right
+When you find a webhook used to trigger a pipeline that alone is a useful hint. that hint can lead to blind code injection reflected XSS or other issues depending on how the pipeline uses data. sometimes it is low noise and high payoff. kinda fun right
 
 for bug bounty submissions you often need to show impact not just possibility. many webhook issues are out of scope for a program so be clever in demonstrating a realistic impact. show how the webhook maps to a meaningful business function. provide a proof of concept that respects program rules and follows responsible disclosure
 
@@ -75,10 +75,10 @@ Simple regex to detect typical webhook URLs in code or logs
 SIEM rule idea  
 Trigger when outbound POSTs to known webhook hosts exceed baseline by X within 5 minutes or when same webhook receives more than N deliveries from diverse source IPs within T minutes
 
-## safe curl examples
-the examples below show how to send benign messages to incoming webhook endpoints. replace `WEBHOOK_URL` with the webhook you control or a test webhook belonging to you. Do not send tests to other people systems
+## Safe curl examples
+The examples below show how to send benign messages to incoming webhook endpoints. replace `WEBHOOK_URL` with the webhook you control or a test webhook belonging to you. Do not send tests to other people systems
 
-### slack incoming webhook simple message
+### Slack incoming webhook simple message
 ```bash
 # replace WEBHOOK_URL with your slack incoming webhook URL
 curl -X POST "WEBHOOK_URL" \
@@ -86,7 +86,7 @@ curl -X POST "WEBHOOK_URL" \
   -d '{"text":"test from security research safe PoC only. do not run on other people systems."}'
 ```
 
-### slack advanced block payload
+### Slack advanced block payload
 ```bash
 curl -X POST "WEBHOOK_URL" \
   -H "Content-Type: application/json" \
@@ -98,7 +98,7 @@ curl -X POST "WEBHOOK_URL" \
   }'
 ```
 
-### discord incoming webhook simple message
+### Discord incoming webhook simple message
 ```bash
 # replace WEBHOOK_URL with your discord webhook URL
 curl -X POST "WEBHOOK_URL" \
@@ -106,7 +106,7 @@ curl -X POST "WEBHOOK_URL" \
   -d '{{"content":"safe PoC message from security researcher. only run on your own webhooks."}}'
 ```
 
-### discord embed example
+### Discord embed example
 ```bash
 curl -X POST "WEBHOOK_URL" \
   -H "Content-Type: application/json" \
@@ -122,14 +122,12 @@ curl -X POST "WEBHOOK_URL" \
   }'
 ```
 
-## quick defensive checklist
-- treat webhook URLs as secrets do not embed them in client side code  
-- verify signatures when supported and enforce timestamp checks  
-- rotate secrets and revoke leaked URLs immediately  
-- use idempotency tokens and require secondary checks for financial flows  
-- rate limit and monitor webhook traffic and add alerts for spikes
+## Quick defensive checklist
+- Treat webhook URLs as secrets do not embed them in client side code  
+- Verify signatures when supported and enforce timestamp checks  
+- Rotate secrets and revoke leaked URLs immediately  
+- Use idempotency tokens and require secondary checks for financial flows  
+- Rate limit and monitor webhook traffic and add alerts for spikes
 
-## closing notes
-when i write about attacks i think from multiple perspectives: attacker defender compliance. this helps me judge severity and what mitigation will be effective
 
 document the context where you found the webhook the surrounding assets and the likely workflow. that context often turns a blind guess into a reproducible finding
