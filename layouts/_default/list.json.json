@@ -1,0 +1,14 @@
+[
+{{- $pages := where .Site.RegularPages "Type" "in" (slice "posts" "post") -}}
+{{- $last := sub (len $pages) 1 -}}
+{{- range $i, $p := $pages -}}
+  {
+    "title": {{ $p.Title | jsonify }},
+    "url": {{ $p.Permalink | jsonify }},
+    "date": {{ $p.Date.Format "2006-01-02" | jsonify }},
+    "tags": {{ $p.Params.tags | default (slice) | jsonify }},
+    "series": {{ $p.Params.series | default (slice) | jsonify }},
+    "summary": {{ (cond (ne $p.Summary "") $p.Summary ($p.Plain | truncate 240)) | plainify | jsonify }}
+  }{{ if lt $i $last }},{{ end }}
+{{- end -}}
+]
