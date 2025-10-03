@@ -1,25 +1,24 @@
-/* 1. tighter content width + centering */
+/* content width */
 .container, .post, .post-content {
   max-width: 850px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* 2. headings & spacing */
+/* headings */
 .post-content h1, .post-content h2, .post-content h3 {
-  letter-spacing: .3px;
   margin-top: 2.2rem;
 }
 
-/* 3. code blocks: subtle border */
+/* code blocks */
 .highlight, pre code {
   border: 1px solid rgba(255,255,255,.08);
   border-radius: 8px;
-  font-size: 0.95rem;
   padding: 0.5rem;
+  font-size: 0.95rem;
 }
 
-/* 4. custom callouts */
+/* callouts */
 .note, .warning, .poc, .mitigation {
   border-left: 4px solid #58ff58;
   padding: .9rem 1rem;
@@ -30,7 +29,7 @@
 .poc { border-color: #63b3ff; background: rgba(99,179,255,.08); }
 .mitigation { border-color: #ffd45e; background: rgba(255,212,94,.08); }
 
-/* 5. tag pills */
+/* tags */
 .tags a {
   display: inline-block;
   padding: .2rem .55rem;
@@ -40,9 +39,22 @@
   font-size: .85rem;
 }
 
-/* 6. blinking cursor on logo */
-.logo::after {
-  content:"_";
-  animation: blink 1s step-end infinite;
-}
+/* typing logo cursor */
+.logo::after { content:"_"; animation: blink 1s step-end infinite; }
 @keyframes blink { 50% { opacity: 0; } }
+
+/* search page */
+#searchBox {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  background: #0f0f0f;
+  color: #f3f3f3;
+  margin: 0.5rem 0 1rem;
+}
+.search-meta { opacity: 0.8; margin-bottom: 0.5rem; }
+.search-results { list-style: none; padding: 0; }
+.search-item { padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.search-item a { font-weight: 600; }
+.search-item-meta { opacity: 0.75; font-size: 0.9rem; margin: 0.2rem 0 0.4rem; }
