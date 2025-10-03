@@ -6,16 +6,13 @@ paginate = 10
 enableRobotsTXT = true
 canonifyURLs = true
 
-# Clean post URLs
 [permalinks]
   posts = "/:year/:month/:slug/"
 
-# Feeds & outputs
 [outputs]
-  home = ["HTML", "RSS", "JSON"]     # JSON is handy for client-side search later
+  home = ["HTML", "RSS", "JSON"]
   section = ["HTML", "RSS"]
 
-# Taxonomies
 [taxonomies]
   tag = "tags"
   series = "series"
@@ -23,31 +20,24 @@ canonifyURLs = true
 [params]
   contentTypeName = "posts"
   themeColor = "green"
-
   showMenuItems = 2
   showLanguageSelector = false
-
   fullWidthTheme = false
   centerTheme = true
-
   showLastUpdated = true
   dateFormat = "2006-01-02"
   readingTime = true
   toc = true
 
-  # Custom assets (put files under /static/)
   css = ["css/custom.css", "css/hl.css"]
   js  = ["js/copy-code.js", "js/typing-logo.js", "js/search.js"]
 
   description = "Practical threat hunting, web malware, and client-side security notes by Himanshu Anand."
   author = "Himanshu Anand"
+  images = ["/images/og/default.png"]
 
-  # Open Graph / X (Twitter) defaults
-  images = ["/images/og/default.png"]  # create this image
-
-# X (Twitter) cards
 [params.twitter]
-  creator = "anand_himanshu"    # your @ without @
+  creator = "anand_himanshu"
   site    = "anand_himanshu"
 
 [markup]
@@ -59,7 +49,6 @@ canonifyURLs = true
     unsafe = true
 
 [languages]
-
   [languages.en]
     languageName = "English"
     title = "Himanshu Anand :: Threat Notes"
@@ -75,7 +64,6 @@ canonifyURLs = true
       logoText = "himanshu@blog:~$"
       logoHomeLink = "/"
 
-    # Header menu (adds a direct link to your X profile)
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "about"
@@ -86,7 +74,10 @@ canonifyURLs = true
         name = "Showcase"
         url = "/showcase"
       [[languages.en.menu.main]]
+        identifier = "search"
+        name = "Search"
+        url = "/search/"
+      [[languages.en.menu.main]]
         identifier = "x"
         name = "X (Twitter)"
         url = "https://x.com/anand_himanshu"
-        weight = 50
