@@ -19,7 +19,7 @@ canonifyURLs = true
 
 [params]
   contentTypeName = "posts"
-  themeColor = "green"
+  themeColor = "orange"
   showMenuItems = 2
   showLanguageSelector = false
   fullWidthTheme = false
@@ -64,20 +64,29 @@ canonifyURLs = true
       logoText = "himanshu@blog:~$"
       logoHomeLink = "/"
 
-    [languages.en.menu]
-      [[languages.en.menu.main]]
-        identifier = "about"
-        name = "About"
-        url = "/about"
-      [[languages.en.menu.main]]
-        identifier = "showcase"
-        name = "Showcase"
-        url = "/showcase"
-      [[languages.en.menu.main]]
-        identifier = "search"
-        name = "Search"
-        url = "/search/"
-      [[languages.en.menu.main]]
-        identifier = "x"
-        name = "X (Twitter)"
-        url = "https://x.com/anand_himanshu"
+	[languages.en.menu]
+	  [[languages.en.menu.main]]
+		identifier = "home"
+		name = "Home"
+		url = "/"
+		weight = 1
+	  [[languages.en.menu.main]]
+		identifier = "about"
+		name = "About"
+		url = "/about"
+		weight = 10
+	  [[languages.en.menu.main]]
+		identifier = "search"
+		name = "Search"
+		url = "/search/"
+		weight = 20
+	  [[languages.en.menu.main]]
+		identifier = "showcase"
+		name = "Showcase"
+		url = "/showcase/"
+		weight = 30
+	  [[languages.en.menu.main]]
+		identifier = "x"
+		name = "X (Twitter)"
+		url = "https://x.com/anand_himanshu"
+		weight = 40
