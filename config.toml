@@ -37,7 +37,7 @@ canonifyURLs = true
 
   # Custom assets (put files under /static/)
   css = ["css/custom.css", "css/hl.css"]
-  js  = ["js/copy-code.js"]
+  js  = ["js/copy-code.js", "js/typing-logo.js", "js/search.js"]
 
   description = "Practical threat hunting, web malware, and client-side security notes by Himanshu Anand."
   author = "Himanshu Anand"
