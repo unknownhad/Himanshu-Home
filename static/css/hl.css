@@ -1,6 +1,6 @@
-.hljs-keyword { color: #9cdcfe; font-weight: 600; }
-.hljs-string  { color: #58ff58; }
-.hljs-comment { color: #6a9955; font-style: italic; opacity: .9; }
-.hljs-number  { color: #ffb86c; }
-.hljs-function .hljs-title { color: #63b3ff; font-weight: bold; }
-.hljs-attr, .hljs-attribute { color: #ffd45e; }
+.hljs-keyword{color:#ffd887;font-weight:600;}
+.hljs-string{color:#6fbf6f;}
+.hljs-comment{color:#6a7a85;font-style:italic;opacity:.95;}
+.hljs-number{color:#ffb86c;}
+.hljs-function .hljs-title{color:#ffd887;font-weight:700;}
+.hljs-attr,.hljs-attribute{color:#ffd887;}
