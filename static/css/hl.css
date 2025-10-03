@@ -1,4 +1,3 @@
-/* Syntax highlighting tuned for "terminal green" vibe */
 .hljs-keyword { color: #9cdcfe; font-weight: 600; }
 .hljs-string  { color: #58ff58; }
 .hljs-comment { color: #6a9955; font-style: italic; opacity: .9; }
