@@ -1,56 +1,70 @@
-baseurl = "/"
+baseurl = "https://blog.himanshuanand.com/"
 languageCode = "en-us"
+title = "Himanshu Anand :: Threat Notes"
 theme = "terminal"
-paginate = 5
+paginate = 10
+enableRobotsTXT = true
+canonifyURLs = true
+
+# Clean post URLs
+[permalinks]
+  posts = "/:year/:month/:slug/"
+
+# Feeds & outputs
+[outputs]
+  home = ["HTML", "RSS", "JSON"]     # JSON is handy for client-side search later
+  section = ["HTML", "RSS"]
+
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  series = "series"
 
 [params]
-  # dir name of your main content (default is `content/posts`).
-  # the list of set content will show up on your index page (baseurl).
   contentTypeName = "posts"
-
-  # ["orange", "blue", "red", "green", "pink"]
   themeColor = "green"
 
-  # if you set this to 0, only submenu trigger will be visible
   showMenuItems = 2
-
-  # show selector to switch language
   showLanguageSelector = false
 
-  # set theme to full screen width
   fullWidthTheme = false
-
-  # center theme with default width
   centerTheme = true
 
-  # set a custom favicon (default is a `themeColor` square)
-  # favicon = "favicon.ico"
+  showLastUpdated = true
+  dateFormat = "2006-01-02"
+  readingTime = true
+  toc = true
 
-  # set post to show the last updated
-  # If you use git, you can set `enableGitInfo` to `true` and then post will automatically get the last updated
-  showLastUpdated = false
-  # Provide a string as a prefix for the last update date. By default, it looks like this: 2020-xx-xx [Updated: 2020-xx-xx] :: Author
-  # updatedDatePrefix = "Updated"
+  # Custom assets (put files under /static/)
+  css = ["css/custom.css", "css/hl.css"]
+  js  = ["js/copy-code.js"]
 
-  # set all headings to their default size (depending on browser settings)
-  # it's set to `true` by default
-  # oneHeadingSize = false
+  description = "Practical threat hunting, web malware, and client-side security notes by Himanshu Anand."
+  author = "Himanshu Anand"
 
+  # Open Graph / X (Twitter) defaults
+  images = ["/images/og/default.png"]  # create this image
+
+# X (Twitter) cards
 [params.twitter]
-  # set Twitter handles for Twitter cards
-  # see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started#card-and-content-attribution
-  # do not include @
-  creator = ""
-  site = ""
+  creator = "anand_himanshu"    # your @ without @
+  site    = "anand_himanshu"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    guessSyntax = true
+    lineNumbersInTable = true
+  [markup.goldmark.renderer]
+    unsafe = true
 
 [languages]
+
   [languages.en]
     languageName = "English"
-    title = "Terminal"
-    subtitle = "A simple, retro theme for Hugo"
-    owner = ""
-    keywords = ""
-    copyright = ""
+    title = "Himanshu Anand :: Threat Notes"
+    subtitle = "Cybersecurity blog focused on threat hunting & web malware"
+    keywords = "cybersecurity, threat intel, web malware, client-side security, magecart, bug bounty"
     menuMore = "Show more"
     readMore = "Read more"
     readOtherPosts = "Read other posts"
@@ -58,9 +72,10 @@ paginate = 5
     missingBackButtonLabel = "Back to home page"
 
     [languages.en.params.logo]
-      logoText = "Terminal"
+      logoText = "himanshu@blog:~$"
       logoHomeLink = "/"
 
+    # Header menu (adds a direct link to your X profile)
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "about"
@@ -70,3 +85,8 @@ paginate = 5
         identifier = "showcase"
         name = "Showcase"
         url = "/showcase"
+      [[languages.en.menu.main]]
+        identifier = "x"
+        name = "X (Twitter)"
+        url = "https://x.com/anand_himanshu"
+        weight = 50
