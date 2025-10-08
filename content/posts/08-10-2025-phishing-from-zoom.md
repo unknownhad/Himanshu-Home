@@ -1,6 +1,6 @@
 ---
 title: "look mom HR application look mom no job"
-date: 2025-10-08T09:00:00+00:00
+date: 2025-10-08
 tags: ["phishing", "zoom", "email", "security", "blog"]
 author: "Unknown"
 draft: false
