@@ -19,29 +19,29 @@ Turns out bad people are now using Zoom's legit features to phish people. Welcom
 ## what happened (short, messy, and real)
 
 1. I got an email that looked like a normal Zoom doc/share notification. Header looked official. Sender looked legit. I almost clicked and moved on.  
-   `![Email header](/images/Zoom_Phishing_Email_header.png)`  
+   [Email header](/images/Zoom_Phishing_Email_header.png)
    Caption: Email header with valid SPF, DKIM and DMARC.
 
-2. On deeper inspection I realized the document link led to an offsite page that redirected to a classic Gmail credential harvesting page.  
-   `![Zoom shared doc](/images/zoom_gmail_phishing.png)`  
+3. On deeper inspection I realized the document link led to an offsite page that redirected to a classic Gmail credential harvesting page.  
+   [Zoom shared doc](/images/zoom_gmail_phishing.png)
    Caption: Zoom UI showing the shared document/link.
 
-3. The attackers used Zoom's document-sharing flow as the trusted vector. People trust Zoom, so they click.
-	   `![Zoom shared doc](/images/Hosted_on_zoom.png)`  
+4. The attackers used Zoom's document-sharing flow as the trusted vector. People trust Zoom, so they click.
+	   [Zoom shared doc](/images/Hosted_on_zoom.png) 
 	   Caption: Screenshot of zoom website.
-4. The phishing page had a "bot protection / phishing protection" gate that a user has to pass first. That is not to protect you - it is to protect the attackers from automated analysis and to make the page feel legitimate.  
+5. The phishing page had a "bot protection / phishing protection" gate that a user has to pass first. That is not to protect you - it is to protect the attackers from automated analysis and to make the page feel legitimate.  
    Paste screenshot here:  
-   `![Bot protection gate](/images/Zoom_Phishing_bots.png)`  
+   [Bot protection gate](/images/Zoom_Phishing_bots.png)
    Caption: Fake bot protection gate that blocks sandboxes and looks legit.
 
-5. One user entered their Gmail user ID and password. The phishing page immediately sent the credentials to a C2 using a WebSocket connection. Live exfiltration.  
+6. One user entered their Gmail user ID and password. The phishing page immediately sent the credentials to a C2 using a WebSocket connection. Live exfiltration.  
    Paste screenshot here:  
-   `![Gmail phishing page](/images/zoom_gmail_phishing.png)`  
+   [Gmail phishing page](/images/zoom_gmail_phishing.png)
    Caption: The Gmail credential harvest page.
 
-6. I also captured a WebSocket snapshot showing the credentials being pushed out.  
+7. I also captured a WebSocket snapshot showing the credentials being pushed out.  
    Paste screenshot here:  
-   `![WebSocket exfiltration](/images/websocket_phishing.png)`  
+   [WebSocket exfiltration](/images/websocket_phishing.png)
    Caption: WebSocket connection showing live exfiltration.
 
 ## the chain of redirects I saw
