@@ -45,9 +45,9 @@ Suspicious search result from a *europa.eu* domain claiming to help stream the m
 
 I clicked the link (safely, in a controlled environment) and instead of any EU content, it redirected me to a **random scammy streaming site**.
 
-At this point, one thing was clear:
+At this point one thing was clear:
 
-> this looked exactly like **SEO poisoning** using a trusted domain (in this case, europa.eu) to funnel users into suspicious streaming sites.
+> this looked exactly like **SEO poisoning** using a trusted domain (in this case europa.eu) to funnel users into suspicious streaming sites.
 
 ---
 
@@ -78,7 +78,7 @@ This rotating behavior is pretty typical for SEO spam / poisoning campaigns. Pay
 
 At this point I thought:
 
-> okay, this probably needs to be reported to the relevant CERT, but I am not sure which contact is correct.
+> okay, this probably needs to be reported to the relevant CERT but I am not sure which contact is correct.
 
 So I did the most natural 2025 move.
 
@@ -86,7 +86,7 @@ I tweeted.
 
 ---
 
-## twitter, friends, and finding the right cert contact
+## twitter, friends and finding the right cert contact
 
 I first put my observation on X (Twitter) to document it and to see if anyone could guide me on the right reporting channel:
 
@@ -136,14 +136,14 @@ I shared:
 ![First email to CERT-EU](/images/europa-eu-email-initial-report.png)  
 Caption: Initial email to CERT-EU describing the behavior.
 
-They replied, but they were unable to reproduce the issue right away:
+They replied but they were unable to reproduce the issue right away:
 
 
 
 ![CERT-EU reply asking for more details](/images/europa-eu-email-cert-questions.png)  
 Caption: CERT-EU asking for details and reproducible evidence.
 
-This is where the rotating / inconsistent behavior of SEO campaigns becomes annoying: by the time defenders go to check, the payload might already have moved, rotated, or partially broken.
+This is where the rotating / inconsistent behavior of SEO campaigns becomes annoying: by the time defenders go to check, the payload might already have moved, rotated or partially broken.
 
 I shared more screenshots and context to help them see what I had observed.
 
@@ -156,14 +156,14 @@ While doing my analysis, I remembered a great writeup that described mass SEO ex
 - **360XSS: Mass Website Exploitation via Virtual Tour Framework for SEO Poisoning**  
   https://olegzay.com/360xss/
 
-I won’t claim this was **exactly the same attack**, but the **TTPs were very similar**:
+I won’t claim this was **exactly the same attack** but the **TTPs were very similar**:
 
 	abuse of legitimate, high-trust domains  
 	modified SEO content / titles like "[Here's Way To Watch]"  
 	redirection chains leading to streaming scam or spam sites  
 	behavior changing over time as campaigns rotate
 
-At minimum, it looked like the same **family of problems**: compromised pages being weaponized not to drop malware, but to hijack SEO for traffic.
+At minimum, it looked like the same **family of problems**: compromised pages being weaponized not to drop malware but to hijack SEO for traffic.
 
 ---
 
@@ -178,7 +178,7 @@ https://www.isb.companiesoffice.govt.nz/
 https://nal.usda.gov
 https://ampl.clair.ucsb.edu/
 ```
-And if you want to explore this yourself, here is one very telling Google dork:
+And if you want to explore this yourself here is one very telling Google dork:
 
 ```text
 intitle:"[Here's Way To Watch]"
@@ -228,13 +228,13 @@ Here is the rough sequence of events:
 ![CERT-EU fix confirmation email](/images/europa-eu-email-fix-confirmation.png)  
 Caption: CERT-EU confirming the issue has been fixed on their side.
 
-I also asked whether they could share anything from an incident response perspective for the community and whether they were okay with me blogging this. I have not seen a detailed IR writeup yet, but I have given this a reasonable amount of time before publishing.
+I also asked whether they could share anything from an incident response perspective for the community and whether they were okay with me blogging this. I have not seen a detailed IR writeup yet but I have given this a reasonable amount of time before publishing.
 
 ---
 
 ## what probably happened (my educated guess)
 
-This section is my **hypothesis**, not an official statement from CERT-EU.
+This section is my **hypothesis** not an official statement from CERT-EU.
 
 Based on what I observed and what we know about similar campaigns:
 
@@ -242,7 +242,7 @@ Based on what I observed and what we know about similar campaigns:
    - `openapi-dev.ema.europa.eu` was reachable publicly when it probably shouldn’t have been.
 
 2. **Attackers found a way to inject or modify SEO-relevant content**
-   - This might have been a stored XSS, misconfigured template, or some CMS/plugin endpoint.
+   - This might have been a stored XSS, misconfigured template or some CMS/plugin endpoint.
    - The goal was not to deface the site, but to hijack search engine results.
 
 3. **They rotated keywords based on trending topics**
@@ -250,17 +250,17 @@ Based on what I observed and what we know about similar campaigns:
    - Titles like `"[Here's Way To Watch]"` strongly suggest SEO-driven campaigns.
 
 4. **The redirection targeted scam streaming pages**
-   - Once users clicked the search result, they’d end up on random streaming or scam sites.
+   - Once users clicked the search result, they would end up on random streaming or scam sites.
    - This is great traffic for shady affiliates, subscription scams or ad fraud.
 
 5. **Deeper compromise (like webshells or long-term RCE) feels unlikely**
    - If they had long-term, reliable RCE on high-profile domains, using them *only* for SEO spam would be a waste.
-   - SEO campaigns benefit more from wide, shallow compromise than from deep, single-target persistence.
+   - SEO campaigns benefit more from wide, shallow compromise than from deep, single target persistence.
 
 6. **The server was likely taken offline or cleaned as part of IR**
-   - Given that CERT-EU confirmed the issue is fixed, it’s safe to assume:
-     - exposure was removed, and/or  
-     - malicious content was removed, and  
+   - Given that CERT-EU confirmed the issue is fixed, it is safe to assume:
+     - exposure was removed and/or  
+     - malicious content was removed and  
      - underlying misconfigurations were corrected.
 
 ---
@@ -293,7 +293,7 @@ Even if the worst case here isn’t data exfiltration, it’s still worth fixing
 
 The fact I had to go via Twitter and friends to find the right reporting contact is… not ideal.
 
-A simple, well-maintained **security.txt**, or even a clear "Report a vulnerability" page, can:
+A simple well-maintained **security.txt** or even a clear "Report a vulnerability" page can:
 
 - reduce the time from discovery to report  
 - avoid reports getting lost in generic inboxes  
@@ -317,7 +317,7 @@ This all started because:
 	and did not just scroll past
 
 You don’t need a zero-day to be helpful.  
-If you notice weird redirects, unexpected search results, or strange behavior on big domains:
+If you notice weird redirects, unexpected search results or strange behavior on big domains:
 
 	take screenshots  
 	collect URLs  
