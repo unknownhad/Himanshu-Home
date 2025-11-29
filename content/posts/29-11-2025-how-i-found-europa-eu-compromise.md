@@ -119,7 +119,7 @@ Pro tip from this whole thing:
 
 ---
 
-## emailing cert-eu: “Security Incident – Infected Subdomain (openapi-dev.ema.europa.eu)”
+## emailing cert-eu: “Security Incident - Infected Subdomain (openapi-dev.ema.europa.eu)”
 
 Armed with the correct email, I finally reached out to:
 
@@ -218,12 +218,12 @@ Still worth doing it every time.
 
 Here is the rough sequence of events:
 
-	**14 September 2025** – India vs Pakistan match; I spot suspicious *europa.eu* search result related to streaming.  
-	**Mid-September 2025** – I analyze the behavior, identify `openapi-dev.ema.europa.eu` as impacted, find similar issues on other domains, and tweet about it.  
-	**17 September 2025** (approx.) – I send my first email to CERT-EU at `services@cert.europa.eu`.  
-	**Following days** – We exchange emails; they initially cannot reproduce the issue and ask for more details.  
-	**6 November 2025** – CERT-EU informs me that the issue has been fixed.  
-	**29 November 2025** – I finally publish this blog post.
+	**14 September 2025** : India vs Pakistan match; I spot suspicious *europa.eu* search result related to streaming.  
+	**Mid-September 2025** : I analyze the behavior, identify `openapi-dev.ema.europa.eu` as impacted, find similar issues on other domains, and tweet about it.  
+	**17 September 2025** (approx.) : I send my first email to CERT-EU at `services@cert.europa.eu`.  
+	**Following days** : We exchange emails; they initially cannot reproduce the issue and ask for more details.  
+	**6 November 2025** : CERT-EU informs me that the issue has been fixed.  
+	**29 November 2025** : I finally publish this blog post.
 
 ![CERT-EU fix confirmation email](/images/europa-eu-email-fix-confirmation.png)  
 Caption: CERT-EU confirming the issue has been fixed on their side.
