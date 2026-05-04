@@ -19,7 +19,7 @@ The cool thing about SLH-DSA is that it only relies on hash functions. No fancy 
 Alongside SLH-DSA there is also ML-DSA. Same NIST batch, different math. ML-DSA uses lattices and is way faster but the API in OpenSSL looks almost identical for both. That detail matters, hold onto it.
 When you sign something with SLH-DSA in randomized mode, the algorithm needs a fresh random nonce called `addrnd`. This nonce gets mixed into the signature. It does not need to stay secret forever (the signature itself is public anyway) but it should not be left lying around in memory after we are done with it. That is just basic crypto hygiene. You wash your hands after handling raw chicken. You wipe nonces after signing.
 
- ![Picture this](/images/aqurmf.jpg) 
+ ![Picture this](/images/aqurfj.jpg) 
 
 ## How I found it
 
@@ -60,7 +60,7 @@ Read that last `if` statement carefully.
 So the check `if (opt_rand != add_rand)` says: if `opt_rand` is NOT pointing at our stack buffer, wipe whatever it is pointing at. Which translates to: in the normal random signing path where `opt_rand` IS pointing at the stack buffer, do nothing.
 That is exactly backwards.
 
-	![code review](/images/aqurmf.jpg) 
+![code review](/images/aqurmf.jpg) 
 
 
 ## Three flavors of broken
