@@ -4,6 +4,7 @@ date: 2023-05-17
 draft: false
 description: "Introducing Legally Blocked, a unique platform offering information about websites, apps, and online services blocked by governments across the globe."
 keywords: ["Legally Blocked", "Geo-Blocked Services", "Internet Censorship", "Cloudflare", "Serverless"]
+author: "Himanshu Anand"
 ---
 
 
