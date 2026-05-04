@@ -19,7 +19,7 @@ The cool thing about SLH-DSA is that it only relies on hash functions. No fancy 
 Alongside SLH-DSA there is also ML-DSA. Same NIST batch, different math. ML-DSA uses lattices and is way faster but the API in OpenSSL looks almost identical for both. That detail matters, hold onto it.
 When you sign something with SLH-DSA in randomized mode, the algorithm needs a fresh random nonce called `addrnd`. This nonce gets mixed into the signature. It does not need to stay secret forever (the signature itself is public anyway) but it should not be left lying around in memory after we are done with it. That is just basic crypto hygiene. You wash your hands after handling raw chicken. You wipe nonces after signing.
 
- ![Picture this](/images/aqurfj.jpg) 
+ ![Picture this](/images/aqurmf.jpg) 
 
 ## How I found it
 
@@ -244,7 +244,7 @@ A few things stuck with me from this whole journey:
 **Post-quantum crypto is new code.** SLH-DSA and ML-DSA only landed in OpenSSL recently. New crypto code in any library is worth reading. It has been touched by fewer eyes than the OG stuff like AES or RSA, which means the easy wins have not been picked clean yet.
 **Filing a clean issue gets a quick fix.** This one surprised me. I included a focused write-up, a small reproducer and a one-line diff that matched the existing pattern in the sibling file. Six days later there was a PR. I think putting in a little extra effort on the report saved everyone time downstream.
 
-## Wrapping up
+## Final Thoughts
 I filed the issue as [openssl/openssl#30950](https://github.com/openssl/openssl/issues/30950) on April 23, and ten days later the patch was merged into master and backported to 3.5, 3.6 and 4.0 via [PR #31029](https://github.com/openssl/openssl/pull/31029). Pretty satisfying turnaround.
 The main takeaway is honestly more about how I found it than what I found. I wandered into a codebase I do not deeply know, picked a file, found a similar file, read them next to each other and noticed something off. Anyone can do that. You do not need to be a crypto expert to spot dumb logic bugs. You just need to read code and ask "wait, that does not look right".
 If you read all the way to the end, thanks for hanging out. Next time you are cleaning up sensitive memory in your own code, double check the condition. Maybe even triple check it. Your future self standing over the core dump will thank you.
