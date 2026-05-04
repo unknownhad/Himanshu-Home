@@ -4,6 +4,7 @@ date: 2025-09-10
 draft: false
 tags: ["security", "phishing", "typosquatting", "punycode", "nodejs", "supply-chain"]
 categories: ["Security"]
+author: "Himanshu Anand"
 description: "A 2-minute browser game to practice spotting typosquatted domains numbers for letters, Unicode homoglyphs and Punycode."
 ---
 
