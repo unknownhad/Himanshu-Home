@@ -2,7 +2,7 @@
 title: "look mom HR application look mom no job"
 date: 2025-10-08
 tags: ["phishing", "zoom", "email", "security", "blog"]
-author: "Unknown"
+author: "Himanshu Anand"
 draft: false
 ---
 
