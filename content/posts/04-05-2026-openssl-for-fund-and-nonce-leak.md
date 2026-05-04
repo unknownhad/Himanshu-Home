@@ -248,3 +248,5 @@ A few things stuck with me from this whole journey:
 I filed the issue as [openssl/openssl#30950](https://github.com/openssl/openssl/issues/30950) on April 23, and ten days later the patch was merged into master and backported to 3.5, 3.6 and 4.0 via [PR #31029](https://github.com/openssl/openssl/pull/31029). Pretty satisfying turnaround.
 The main takeaway is honestly more about how I found it than what I found. I wandered into a codebase I do not deeply know, picked a file, found a similar file, read them next to each other and noticed something off. Anyone can do that. You do not need to be a crypto expert to spot dumb logic bugs. You just need to read code and ask "wait, that does not look right".
 If you read all the way to the end, thanks for hanging out. Next time you are cleaning up sensitive memory in your own code, double check the condition. Maybe even triple check it. Your future self standing over the core dump will thank you.
+
+Thanks to Bas, Jordan and Thea for your time and help.
