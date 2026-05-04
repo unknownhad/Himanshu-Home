@@ -4,6 +4,7 @@ date: 2023-07-12
 draft: false
 description: "Meet FriendlyIR, your innovative cybersecurity ally on Slack! It streamlines your tracking of the latest cybersecurity news, blog posts, and social media updates in real-time."
 keywords: ["FriendlyIR", "CyberSecurity", "Slack", "News", "Media", "Cloudflare", "Serverless"]
+author: "Himanshu Anand"
 ---
 
 
