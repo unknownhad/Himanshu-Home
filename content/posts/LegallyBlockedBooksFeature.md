@@ -4,6 +4,7 @@ date: 2023-06-08
 draft: false
 description: "Introducing Blocked Books: A New Feature on LegallyBlocked."
 keywords: ["Legally Blocked", "Geo-Blocked Services", "Internet Censorship", "Books", "Cloudflare", "Serverless"]
+author: "Himanshu Anand"
 ---
 
 
