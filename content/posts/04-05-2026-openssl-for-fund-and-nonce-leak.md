@@ -6,9 +6,9 @@ author: "Himanshu Anand"
 draft: false
 ---
 
-I was poking around the OpenSSL source code recently. Not really hunting for anything specific (As I know this is one the highly audit code), just curious about how the new post-quantum crypto stuff was wired up in version 4.0.0. I went in expecting to find nothing interesting. Instead I tripped over a single-character logic bug that leaks cryptographic randomness onto the stack on every signing call.
+I was poking around the OpenSSL source code recently. Not really hunting for anything specific (one of the most heavily audited codebases), just curious about how the new post-quantum crypto stuff was wired up in version 4.0.0. I went in expecting to find nothing interesting. Instead I tripped over a single-character logic bug that leaks cryptographic randomness onto the stack on every signing call.
 
-Quick disclaimer: I am not a crypto person. I had to look up (In current worls look up means, asking LLM please descibe me like a kid ) half of these acronyms while writing this. So if you also feel a bit lost when people start saying things like "FIPS 205 addrnd nonce" and your brain just freezes, you are in the right place. We will go slow.
+Quick disclaimer: I am not a crypto person. I had to look up (In current world look up means, asking LLM please explain me like a kid ) half of these acronyms while writing this. So if you also feel a bit lost when people start saying things like "FIPS 205 addrnd nonce" and your brain just freezes, you are in the right place. We will go slow.
 Let me walk you through what I found.
 
 ## What is SLH-DSA anyway
