@@ -4,6 +4,7 @@ date: 2023-11-03
 draft: false
 description: "Announcing AWSAttacks - a curated repository on GitHub dedicated to AWS threat intelligence. Explore, share feedback, and contribute to enhance our collective cybersecurity knowledge!"
 keywords: ["AWSAttacks", "Threat Intelligence", "Cybersecurity", "AWS", "GitHub", "Community", "IoCs"]
+author: "Himanshu Anand"
 ---
 
 
