@@ -76,10 +76,9 @@ As of today, only CVE-2026-43284 (the ESP side) has a [mainline fix](https://git
 Microsoft's Defender team [confirmed limited in-the-wild exploitation](https://www.microsoft.com/en-us/security/blog/2026/05/08/active-attack-dirty-frag-linux-vulnerability-expands-post-compromise-risk/) within **24 hours** of disclosure. Attackers gaining SSH access, deploying an ELF binary, popping root via `su`, modifying authentication configs, wiping session files, moving laterally. The full playbook, live, in production environments.
 CTS ([@gf_256](https://x.com/gf_256/status/2052480591489122747)) summed it up in five words:
 > **"responsible disclosure is dead🤦"**
-[![CTS Tweet](/images/cts_tweet.jpg)](https://x.com/gf_256/status/2052480591489122747)
-Yeah.
 ![CTS Tweet](/images/cts_tweet.png)
-> 
+https://x.com/gf_256/status/2052480591489122747
+Yeah.
 
 ## so what is actually dead here
 
@@ -122,6 +121,6 @@ I will go deeper on several of these points in follow-up posts:
 - **the week linux caught fire** (Copy Fail + Dirty Frag technical deep dive) → *coming soon*
 - **your CI/CD pipeline needs AI now** (the defensive playbook) → *coming soon*
 - **blue team survival guide for the LLM era** (practical integration patterns for defenders) → *coming soon*
-If any of this resonated, hit me up on [X](https://x.com/anand_himanshu). And if you disagree, *especially* hit me up. I would love to hear the other side.
+If any of this resonated, hit me up on Twitter/X (https://x.com/anand_himanshu). And if you disagree, *especially* hit me up. I would love to hear the other side.
 
 Thanks for reading.
