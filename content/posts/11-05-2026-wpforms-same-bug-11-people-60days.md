@@ -64,8 +64,49 @@ Every webhook provider knows this. So every webhook provider gives you a way to 
 
 Either pattern, the rule is the same: if you do not verify, you do not trust. A webhook handler that does not verify is just a public API endpoint that mutates payment state. That is what we have here.
 
-![webhook with vs without signature verification diagram](/images/webhook_signature_diagram.png)
-*left: how it should work. PayPal signs the body, server verifies before doing anything. right: how wpforms paypal does it. server just shrugs and does the thing. anyone on the internet can be PayPal.*
+Here is the asymmetry in one picture.
+
+```
+================================================================
+  HOW IT SHOULD WORK (stripe, square, properly built webhooks)
+================================================================
+
+  [Anyone]    --POST body, no signature-->   [Server]
+                                                 |
+                                                 v
+                                            verify signature?  FAIL
+                                                 |
+                                                 v
+                                            403, no DB change
+
+
+  [PayPal]    --POST body + signature-->     [Server]
+                                                 |
+                                                 v
+                                            verify signature?  PASS
+                                                 |
+                                                 v
+                                            update DB, fire hooks
+
+
+================================================================
+  HOW WPFORMS DOES IT (paypal commerce integration only)
+================================================================
+
+  [Anyone]    --POST forged JSON-->          [Server]
+                                                 |
+                                                 v
+                                            json_decode( body )
+                                            check event_type (public allowlist)
+                                            check status   (attacker controlled)
+                                            check amount   (public on the form)
+                                                 |
+                                                 v
+                                            update DB, fire hooks
+                                            "money moves"
+```
+
+The top block is how every webhook in the world is supposed to work. The bottom block is what the WPForms PayPal handler actually does. The server cannot tell `[Anyone]` apart from `[PayPal]` because it never looks at the signature header. The "checks" it does perform are all things the attacker controls or can read from the public form.
 
 ## the wpforms paypal webhook in one paragraph
 
@@ -254,7 +295,7 @@ This is the part of the 90 day disclosure model that I keep coming back to. The 
 
 If 11 of us found the same bug in 6 weeks, the right question is not "why so many duplicates", it is "where are the other ones".
 
-![iceberg meme: 11 reporters above water, unknown attackers and unreported finders below](/images/ideberg.png)
+![iceberg meme: 11 reporters above water, unknown attackers and unreported finders below](/images/iceberg.png)
 *the 11 of us who reported are the part above the waterline. the part below the waterline is the people who found the same bug and chose to do something else with it. nobody knows how big that part is. that is the problem.*
 
 ## lessons for bug finders
