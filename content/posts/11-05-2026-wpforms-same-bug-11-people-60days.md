@@ -295,7 +295,8 @@ This is the part of the 90 day disclosure model that I keep coming back to. The 
 
 If 11 of us found the same bug in 6 weeks, the right question is not "why so many duplicates", it is "where are the other ones".
 
-![iceberg meme: 11 reporters above water, unknown attackers and unreported finders below](/images/iceberg.png)
+![iceberg meme: 11 reporters above water, unknown attackers and unreported finders below](/images/iceberg.jpg)
+
 *the 11 of us who reported are the part above the waterline. the part below the waterline is the people who found the same bug and chose to do something else with it. nobody knows how big that part is. that is the problem.*
 
 ## lessons for bug finders
