@@ -3,6 +3,7 @@ title: "10 people found my bug before me: the wpforms paypal webhook (cve-2026-4
 date: 2026-05-11
 tags: ["security", "wordpress", "webhooks", "paypal", "disclosure", "vulnerability-management", "blog"]
 author: "Himanshu Anand"
+draft: true
 ---
 
 ## TLDR
