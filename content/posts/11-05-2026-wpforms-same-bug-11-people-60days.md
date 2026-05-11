@@ -5,30 +5,6 @@ tags: ["security", "wordpress", "webhooks", "paypal", "disclosure", "vulnerabili
 author: "Himanshu Anand"
 ---
 
-# 10 people found my bug before me: the wpforms paypal webhook (cve-2026-40764)
-
-2026-05-11 :: Himanshu Anand :: ~15 min read
-
-#security  #wordpress  #webhooks  #paypal  #disclosure  #vulnerability-management
-
-## Table of Contents
-
-- [TLDR](#tldr)
-- [where this post fits](#where-this-post-fits)
-- [the story (the one I hinted at)](#the-story-the-one-i-hinted-at)
-- [quick refresher: what a webhook is and why it needs a signature](#quick-refresher-what-a-webhook-is-and-why-it-needs-a-signature)
-- [the wpforms paypal webhook in one paragraph](#the-wpforms-paypal-webhook-in-one-paragraph)
-- [the missing check (the whole bug in 6 lines)](#the-missing-check-the-whole-bug-in-6-lines)
-- [the four placebo checks that do not save you](#the-four-placebo-checks-that-do-not-save-you)
-- [proof of concept](#proof-of-concept)
-- [the fallback url that does not need the rest api](#the-fallback-url-that-does-not-need-the-rest-api)
-- [the same plugin gets stripe and square right](#the-same-plugin-gets-stripe-and-square-right)
-- [the suggested fix](#the-suggested-fix)
-- [what 10 duplicate reports actually means](#what-10-duplicate-reports-actually-means)
-- [lessons for bug finders](#lessons-for-bug-finders)
-- [lessons for vendors](#lessons-for-vendors)
-- [final thoughts](#final-thoughts)
-
 ## TLDR
 
 WPForms Lite is a WordPress form plugin with around 6 million active installs. Versions 1.10.0.1 through 1.10.0.4 ship a PayPal Commerce webhook handler that accepts events from anyone on the internet. No signature check. No shared secret. No callback to PayPal. Send a forged JSON body to `/wp-json/wpforms/ppc/webhooks` and you can flip any pending order from "processed" to "completed", which fires every downstream action the site has set up: digital downloads, license key emails, membership grants, CRM integrations, custom hooks. You can also send a `PAYMENT.CAPTURE.DENIED` event for a real order and mark a paying customer as failed.
