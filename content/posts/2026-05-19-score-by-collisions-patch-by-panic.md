@@ -52,7 +52,7 @@ The other thing Linus said is worth quoting in full:
 
 > If you actually want to add value, read the documentation, create a patch too and add some real value on top of what the AI did. Don't be the drive-by "send a random report with no real understanding" kind of person.
 
-I have been guilty of the drive-by. You find a bug you have the impact you want to ship and move on. But a report with a patch attached gets fixed faster, Eevery single time and it builds trust you will need next time you walk into that vendor's inbox.
+I have been guilty of the drive-by. You find a bug you have the impact you want to ship and move on. But a report with a patch attached gets fixed faster, every single time and it builds trust you will need next time you walk into that vendor's inbox.
 
 If the project is open source read the code. Find the fix. Send a PR. Even a wrong patch gives the maintainer a starting point. A blank page does not.
 
@@ -155,8 +155,6 @@ The Lobsters thread asked real questions. Let me try them here.
 **"What does the world look like at 10x or 100x incidents?"** I do not know. But the side that automates fastest wins. Right now that is the offense. Defense has to close the gap.
 
 ## final thoughts
-
-The previous post was a complaint. This one is a proposal.
 
 Severity by collision count, Researchers ship patches not just reports, Companies redesign for a world where the patch lands after the exploit not before.
 
