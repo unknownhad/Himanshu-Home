@@ -161,7 +161,7 @@ Severity by collision count, Researchers ship patches not just reports, Companie
 
 None of this is free. None of this ships next week. But the old playbook is not coming back. The faster we accept that the faster we start building the new one.
 
-![this is fine](/images/this_is_fine.jpg)
+![this is fine](/images/ThisIsFineDog.jpg)
 
 If any of this resonated [hit me up](https://x.com/anand_himanshu). If you disagree *especially* hit me up. The whole point of writing this stuff is to get holes punched in it before an attacker does.
 
