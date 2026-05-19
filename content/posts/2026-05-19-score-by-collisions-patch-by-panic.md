@@ -31,6 +31,7 @@ Here is what severity should look like in 2026.
 The collision count is the signal. Use it.
 
 Linus said the quiet part out loud last week on [LKML](https://lkml.org/lkml/2026/5/17/896):
+![Linus Torvalds LKML AI Bug Reports Screenshot](/images/linus_lkml_screenshot.png)]
 
 > So just to make it really clear: if you found a bug using AI tools, the chances are somebody else found it too.
 
