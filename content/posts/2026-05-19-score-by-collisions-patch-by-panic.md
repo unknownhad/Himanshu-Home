@@ -7,11 +7,11 @@ author: "Himanshu Anand"
 ---
 
 ## TLDR;
-The [last post](https://blog.himanshuanand.com/2026/05/the-90-day-disclosure-policy-is-dead/) was a complaint. This one is a proposal. Score severity by collision count. Researchers ship patches not just reports. Companies redesign for a world where the exploit lands before the patch. No magic. No vendor pitch. Just the playbook.
+Score severity by collision count. Researchers ship patches not just reports. Companies redesign for a world where the exploit lands before the patch. No magic. No vendor pitch. Just the playbook.
 
 ---
 
-The last post went further than I expected. NYT's [Hard Fork](https://www.nytimes.com/2026/05/15/podcasts/ai-safety-is-so-back-mythos-mayhem-with-nikesh-arora-hot-mess-express.html) picked it up. The [Lobsters thread](https://lobste.rs/s/qxkdgl/90_day_disclosure_policy_is_dead) had sharp questions. A few people made a fair point. "The model is broken" is a complaint not a proposal.
+The [last post](https://blog.himanshuanand.com/2026/05/the-90-day-disclosure-policy-is-dead/) went further than I expected. NYT's [Hard Fork](https://www.nytimes.com/2026/05/15/podcasts/ai-safety-is-so-back-mythos-mayhem-with-nikesh-arora-hot-mess-express.html) picked it up. The [Lobsters thread](https://lobste.rs/s/qxkdgl/90_day_disclosure_policy_is_dead) had sharp questions. A few people made a fair point. "The model is broken" is a complaint not a proposal.
 
 So here is the proposal.
 
@@ -31,7 +31,7 @@ Here is what severity should look like in 2026.
 The collision count is the signal. Use it.
 
 Linus said the quiet part out loud last week on [LKML](https://lkml.org/lkml/2026/5/17/896):
-![Linus Torvalds LKML AI Bug Reports Screenshot](/images/linus_lkml_screenshot.png)]
+![Linus Torvalds LKML AI Bug Reports Screenshot](/images/linus_lkml_screenshot.png)
 
 > So just to make it really clear: if you found a bug using AI tools, the chances are somebody else found it too.
 
