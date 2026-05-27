@@ -1,6 +1,6 @@
 ---
 title: "Announcing API for Cloud Intel Atomic Indicators"
-date: 29-11-2023
+date: 2023-11-29
 author: "Himanshu Anand"
 draft: false
 ---
