@@ -1,5 +1,5 @@
 ---
-title: "the 90 day disclosure policy is dead"
+title: "The 90 day disclosure policy is dead"
 date: 09-05-2026
 draft: false
 tags: ["security", "llm", "disclosure", "vulnerability-management", "linux", "blog"]
