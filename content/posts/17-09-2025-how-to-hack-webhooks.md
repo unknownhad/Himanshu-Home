@@ -1,6 +1,6 @@
 ---
 title: "A step by step guide how to hack webhooks"
-date: 2025-09-17
+date: 17-09-2025
 draft: false
 tags: ["security","webhooks","threathunting","bugbounty"]
 author: "Himanshu Anand"
