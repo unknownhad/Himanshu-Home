@@ -1,6 +1,6 @@
 ---
 title: "The 90 day disclosure policy is dead"
-date: 09-05-2026
+date: 2026-05-09
 draft: false
 tags: ["security", "llm", "disclosure", "vulnerability-management", "linux", "blog"]
 author: "Himanshu Anand"
