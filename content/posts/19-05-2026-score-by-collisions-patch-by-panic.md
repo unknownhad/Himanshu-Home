@@ -165,3 +165,11 @@ None of this is free. None of this ships next week. But the old playbook is not 
 If any of this resonated [hit me up](https://x.com/anand_himanshu). If you disagree *especially* hit me up. The whole point of writing this stuff is to get holes punched in it before an attacker does.
 
 Thanks for reading.
+
+---
+*This is the second post in the series. Previous:*
+- [the 90 day disclosure policy is dead](https://blog.himanshuanand.com/2026/05/the-90-day-disclosure-policy-is-dead/)
+*Next:*
+- [30 minutes from patch to exploit](https://blog.himanshuanand.com/2026/05/30-minutes-from-patch-to-exploit/)
+- **10 people found my bug before me** (the duplicate finder problem and what it means for bounties) → *coming soon*
+- **defender playbook for the LLM era** (practical integration patterns) → *coming soon*
