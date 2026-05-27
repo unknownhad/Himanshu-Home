@@ -1,5 +1,5 @@
 ---
-title: "score by collisions, patch by panic"
+title: "Score by collisions, Patch by panic"
 date: 19-05-2026
 draft: false
 tags: ["security", "llm", "disclosure", "defense", "blue-team", "blog"]
