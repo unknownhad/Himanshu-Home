@@ -1,6 +1,6 @@
 ---
 title: "Why Relying on LLMs for Code Can Be a Security Nightmare"
-date: 2025-08-22T09:00:00+01:00
+date: 22-08-2025
 draft: false
 tags: ["security", "llm", "appsec", "blue team"]
 description: "LLM generated code can ships demo logic with security issues not defenses. Here is a real world example and how it could be abused."
