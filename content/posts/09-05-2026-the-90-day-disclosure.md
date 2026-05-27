@@ -118,7 +118,7 @@ If you're still reading this, you're awesome. Thanks for sticking with me!
 I will go deeper on several of these points in follow-up posts:
 - **score by collisions, patch by panic** → [Link](https://blog.himanshuanand.com/2026/05/score-by-collisions-patch-by-panic/)
 - **10 people found my bug before me** (the duplicate finder problem and what it means for bounties) → [Link](https://blog.himanshuanand.com/TBD/)
-- **30 minutes from patch to exploit** (the React story and the death of the n-day gap) → *coming soon*
+- **30 minutes from patch to exploit** (the React story and the death of the n-day gap) → [Link](https://blog.himanshuanand.com/2026/05/30-minutes-from-patch-to-exploit/)
 - **the week linux caught fire** (Copy Fail + Dirty Frag technical deep dive) → *coming soon*
 - **your CI/CD pipeline needs AI now** (the defensive playbook) → *coming soon*
 - **blue team survival guide for the LLM era** (practical integration patterns for defenders) → *coming soon*
