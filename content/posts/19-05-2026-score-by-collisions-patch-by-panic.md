@@ -1,6 +1,6 @@
 ---
 title: "Score by collisions, Patch by panic"
-date: 19-05-2026
+date: 2026-05-19
 draft: false
 tags: ["security", "llm", "disclosure", "defense", "blue-team", "blog"]
 author: "Himanshu Anand"
