@@ -1,6 +1,6 @@
 ---
 title: "Detecting LLM Prompt Injection Without Slowing You Down"
-date: 10-08-2025
+date: 2025-08-10
 draft: false
 author: "Himanshu Anand"
 description: "A lightweight, fast, and easy-to-use service for detecting LLM prompt injection attempts before they reach your model. No extra latency, no extra LLM calls — just a simple API that returns true or false."
