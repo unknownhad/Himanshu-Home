@@ -7,7 +7,7 @@ author: "Himanshu Anand"
 ---
 
 ## TLDR;
-Score severity by collision count. Researchers ship patches not just reports. Companies redesign for a world where the exploit lands before the patch. No magic. No vendor pitch. Just the playbook.
+Score severity by collision count. Researchers ship patches not just reports. Companies redesign for a world where the exploit lands before the patch. No vendor pitch just a concrete playbook.
 
 ---
 
@@ -17,18 +17,18 @@ So here is the proposal.
 
 ## a new severity model
 
-The current model treats every report as if it lives in a vacuum, One reporter, One bug, One timeline. That was the assumption the old playbook ran on It no longer holds.
+The current model treats every report as if it lives in a vacuum, The old model assumed one reporter, one bug, one timeline. That was the assumption the old playbook ran on It no longer holds.
 Here is what severity should look like in 2026.
 
 **One reporter and No exploit.** Standard severity. Standard window. Business as usual.
 
 **Two or more reporters of the same bug.** Severity goes up a notch. If unrelated researchers are finding the same flaw a less friendly party probably has it too. Shrink the window.
 
-**Working exploit attached.** Critical. The patch window collapses from weeks to days.
+**Working exploit attached.** A working exploit makes it critical and collapses the window to days from weeks to days.
 
-**Working exploit and a public PoC.** P0. Stop the line. Patch now.
+**Working exploit and a public PoC.** A public PoC makes it a P0 stop the line and patch.
 
-The collision count is the signal. Use it.
+A threat actor still beat them by two months.
 
 Linus said the quiet part out loud last week on [LKML](https://lkml.org/lkml/2026/5/17/896):
 ![Linus Torvalds LKML AI Bug Reports Screenshot](/images/linus_lkml_screenshot.png)
@@ -142,7 +142,7 @@ In finance when a stock drops too fast trading halts. Same idea for software.
 
 The Lobsters thread asked real questions. Let me try them here.
 
-**"Will LLMs hit a ceiling on bugs?"** Maybe. Fuzzers did. AFL ate everything for a couple of years then the easy bugs dried up and the work moved up the stack. LLMs might play out the same way. Bottom of the pyramid drains. Top stays hard. The middle is where the arms race lives and the side that scales smarter wins it.
+**"Will LLMs hit a ceiling on bugs?"** Maybe. Fuzzers did. AFL ate everything for a couple of years then the easy bugs dried up and the work moved up the stack. LLMs might play out the same way. The easy bugs at the bottom dry up; the hard ones at the top stay hard. The middle is where the arms race lives and the side that scales smarter wins it.
 
 **"LLM scanners return 400 false positives for every real bug."** True today. Less true every month. Tune the prompts. Stack a deterministic SAST tool ahead of the LLM to cut the noise floor before the model ever sees the code. The job is not "LLM replaces human". It is "LLM filters the ten things a human should actually look at this morning".
 
