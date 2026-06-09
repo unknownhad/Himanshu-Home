@@ -220,6 +220,6 @@ Thanks for reading, If you made it through all four posts you are genuinely awes
 
 *This is the fourth and final post in the series. Previous:*
 
-- [the 90 day disclosure policy is dead](https://blog.himanshuanand.com/2026/05/the-90-day-disclosure-policy-is-dead/)
-- [score by collisions, patch by panic](https://blog.himanshuanand.com/2026/05/score-by-collisions-patch-by-panic/)
-- [30 minutes from patch to exploit](https://blog.himanshuanand.com/2026/05/30-minutes-from-patch-to-exploit/)
+- **score by collisions, patch by panic** → [Link](https://blog.himanshuanand.com/2026/05/score-by-collisions-patch-by-panic/)
+- **10 people found my bug before me** (the duplicate finder problem and what it means for bounties) → [Link](https://blog.himanshuanand.com/TBD/)
+- **30 minutes from patch to exploit** (the React story and the death of the n-day gap) → [Link](https://blog.himanshuanand.com/2026/05/30-minutes-from-patch-to-exploit/)
