@@ -1,6 +1,6 @@
 baseurl = "https://blog.himanshuanand.com/"
 languageCode = "en-us"
-title = "Himanshu Anand :: Threat Notes"
+title = "Himanshu Anand :: Security & Other Notes"
 theme = "terminal"
 paginate = 10
 enableRobotsTXT = true
@@ -32,7 +32,7 @@ canonifyURLs = true
   css = ["css/custom.css", "css/hl.css"]
   js  = ["js/copy-code.js", "js/typing-logo.js", "js/search.js"]
 
-  description = "Practical threat hunting, web malware, and client-side security notes by Himanshu Anand."
+  description = "Practical security, experiances, thoughts, bug bounty and epxloit notes by Himanshu Anand."
   author = "Himanshu Anand"
   images = ["/images/og/default.png"]
 
@@ -51,9 +51,9 @@ canonifyURLs = true
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Himanshu Anand :: Threat Notes"
-    subtitle = "Cybersecurity blog focused on threat hunting & web malware"
-    keywords = "cybersecurity, threat intel, web malware, client-side security, magecart, bug bounty"
+    title = "Himanshu Anand :: Security & Other Notes"
+    subtitle = "Yet naother Cybersecurity blog focused on Exploits, Malwares, AI and what not"
+    keywords = "cybersecurity, AI Security, Exploits , threat intel, bug bounty"
     menuMore = "Show more"
     readMore = "Read more"
     readOtherPosts = "Read other posts"
