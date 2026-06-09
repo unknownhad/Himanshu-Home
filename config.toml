@@ -35,6 +35,7 @@ canonifyURLs = true
   description = "Practical security, experiances, thoughts, bug bounty and epxloit notes by Himanshu Anand."
   author = "Himanshu Anand"
   images = ["/images/og/default.png"]
+  favicon = "favicon.svg"
 
 [params.twitter]
   creator = "anand_himanshu"
