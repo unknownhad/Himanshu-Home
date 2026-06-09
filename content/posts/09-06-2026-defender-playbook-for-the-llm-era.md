@@ -119,7 +119,7 @@ If it still gets through, your patch is incomplete. Better to hear that from you
 
 ## 5. let the diff write your WAF rule[⌗](#5-virtual-patching)
 
-![the WAF rule is a tourniquet, not a cure](https://blog.himanshuanand.com/images/bandaid_bullet_wound_waf.jpg)
+![Virtual patching is a tourniquet, not a cure](https://blog.himanshuanand.com/images/bandaid_bullet_wound_waf.jpg)
 
 Post 2 said pre build virtual patching and post 3 teased deriving a WAF rule in the same five minutes as the PoC and this is where those two ideas meet.
 
@@ -206,7 +206,7 @@ A robot reviewer will not save you on its own, so here are three limits before y
 
 ## final thoughts[⌗](#final-thoughts)
 
-![Virtual patcing is a tourniquet, not a cure](https://blog.himanshuanand.com/images/bandaid_bullet_wound_waf.jpg)
+![Virtual patcing is a tourniquet, not a cure](https://blog.himanshuanand.com/images/predator_handshake_same_llms.jpg)
 
 The whole series really comes down to the fact that the offense automated and the defense mostly did not and the 90 day window broke because finders got cheap and exploits got fast. Wishing the LLMs away is not going to work because they are not leaving, so the move is to drag them onto your side of the line and put them in your pipeline, pointed at your own code, running on every push and every upstream patch.
 
