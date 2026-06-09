@@ -37,3 +37,26 @@ a{color:var(--accent);} a:hover{color:var(--accent-2);}
 .search-item{padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.06);}
 .search-item a{font-weight:600;}
 .search-item-meta{color:var(--muted);font-size:.9rem;margin:.2rem 0 .4rem;}
+
+/* ---- Footer social icons ---- */
+.socials{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:1.5rem;
+  width:760px;
+  max-width:100%;
+  margin:0 auto 2.5rem;
+  padding-top:1.4rem;
+  border-top:1px solid var(--border);
+}
+.socials a{
+  color:var(--muted);
+  display:inline-flex;
+  transition:color .2s ease, transform .2s ease;
+}
+.socials a:hover{
+  color:var(--accent);          /* your orange */
+  transform:translateY(-2px);
+}
+.socials svg{ width:20px; height:20px; display:block; }
