@@ -60,9 +60,10 @@ a{color:var(--accent);} a:hover{color:var(--accent-2);}
   transform:translateY(-2px);
 }
 .socials svg{ width:20px; height:20px; display:block; }
-/* ---- Next/prev post buttons: dark text on orange ---- */
+/* ---- Older/Newer + Prev/Next post buttons: dark text on orange (both markups) ---- */
+.pagination__buttons .button,
+.pagination__buttons .button:hover,
 .pagination__buttons .button a,
 .pagination__buttons .button a:hover{
   color:var(--bg);
-}
 }
