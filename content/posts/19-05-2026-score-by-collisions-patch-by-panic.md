@@ -171,5 +171,6 @@ Thanks for reading.
 - [the 90 day disclosure policy is dead](https://blog.himanshuanand.com/2026/05/the-90-day-disclosure-policy-is-dead/)
 *Next:*
 - [30 minutes from patch to exploit](https://blog.himanshuanand.com/2026/05/30-minutes-from-patch-to-exploit/)
+- **Defender playbook for the LLM era** (practical integration patterns for defenders) → [Link](https://blog.himanshuanand.com/2026/06/defender-playbook-for-the-llm-era/)
 - **10 people found my bug before me** (the duplicate finder problem and what it means for bounties) → *coming soon*
 - **defender playbook for the LLM era** (practical integration patterns) → *coming soon*
