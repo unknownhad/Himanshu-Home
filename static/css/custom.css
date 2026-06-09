@@ -59,4 +59,8 @@ a{color:var(--accent);} a:hover{color:var(--accent-2);}
   color:var(--accent);          /* your orange */
   transform:translateY(-2px);
 }
+/* ---- Next/prev post buttons: dark text on orange ---- */
 .socials svg{ width:20px; height:20px; display:block; }
+.pagination__buttons .button a:hover{
+  color:var(--bg);
+}
