@@ -15,21 +15,34 @@ a{color:var(--accent);} a:hover{color:var(--accent-2);}
 .tags a{display:inline-block;padding:.2rem .6rem;border:1px solid var(--border);
   border-radius:999px;margin:.15rem .25rem 0 0;font-size:.85rem;color:var(--text);}
 
-.highlight, pre {
+/* Only .highlight is the visible box */
+.highlight {
   border: 1px solid var(--border);
   border-radius: 10px;
   background: #0b0e14;
   padding: .6rem .7rem;
   font-size: .95rem;
 }
+/* Kill the theme's inner .code-toolbar box (copy-button wrapper) */
+.code-toolbar {
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* Kill the theme's pre borders */
 pre {
   position: relative;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
+/* Inner code stays clean */
 pre code {
-  border: none;
-  background: transparent;
-  padding: 0;
-  border-radius: 0;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
 
 .note,.warning,.poc,.mitigation{
