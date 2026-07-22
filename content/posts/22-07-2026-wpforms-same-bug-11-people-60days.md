@@ -1,5 +1,5 @@
 ---
-title: "10 people found my bug before me: the wpforms paypal webhook (cve-2026-4986)"
+title: "Reporter #11: 10 people found the WPForms PayPal bug before me (CVE-2026-4986)"
 date: 2026-07-22
 tags: ["security", "wordpress", "webhooks", "paypal", "disclosure", "vulnerability-management", "blog"]
 author: "Himanshu Anand"
@@ -8,25 +8,43 @@ draft: false
 
 ## TLDR
 
-WPForms Lite is a WordPress form plugin with 5 million plus active installs. Versions 1.10.0.1 through 1.10.0.4 shipped a PayPal Commerce webhook handler that accepted events from anyone on the internet. No PayPal signature verification. No callback to PayPal before processing. Send a forged JSON body to `/wp-json/wpforms/ppc/webhooks/` and the plugin would treat it like a real PayPal event.
+WPForms Lite is a WordPress form plugin with **5 million plus active installations**. Public advisory data identifies versions **1.10.0.1 through 1.10.0.4** as affected by **CVE-2026-4986**: the PayPal Commerce webhook processed incoming events without first verifying that PayPal actually sent them.
 
-The impact was payment state manipulation. A forged `PAYMENT.CAPTURE.COMPLETED` event could mark a matching pending PayPal transaction as completed and fire downstream payment completed actions. A forged `PAYMENT.CAPTURE.DENIED` event could mark a matching transaction as denied. That is the kind of bug where the database starts telling a story that PayPal never actually told.
+In my local lab, a forged event could change the state of a matching payment record. A forged `PAYMENT.CAPTURE.COMPLETED` event could mark a matching pending transaction as completed and trigger downstream payment-completed actions. A forged `PAYMENT.CAPTURE.DENIED` event could mark a matching transaction as denied.
 
-The same plugin already verified Stripe and Square webhooks correctly. PayPal was the odd one out. Public tracking now lists this as **CVE-2026-4986**, `WPForms Lite < 1.10.0.5 - Unauthenticated PayPal Webhook Forgery`, fixed in **1.10.0.5**. I was very late to the party. I was reporter number 11.
+That is the kind of bug where the database starts telling a story that PayPal never actually told.
+
+WPForms fixed the issue in **1.10.0.5**. The 5 million plus number is the plugin's reach, not a claim that 5 million sites were exploitable. Exposure depended on running an affected version and using the PayPal Commerce path. Please do not turn an install count into a casualty count. Cybersecurity already has enough dramatic arithmetic.
+
+I independently found and reported the issue, but I was not the first researcher. The public advisory credits **Sudhanshu Chauhan of RedHunt Labs**, and the response to my submission told me I was **reporter number 11**.
+
+I was very late to the party. The snacks were gone. The CVE was already being prepared. Ten researchers were inside asking whether anyone had validated the webhook signature.
 
 ## where this post fits
 
-If you read [my last post on the death of the 90 day disclosure policy](https://blog.himanshuanand.com/2026/05/the-90-day-disclosure-policy-is-dead/), you saw story 1: I found a bug, sent it in and the triage team said "you are reporter eleven". I left the technical details vague because I did not want to accidentally turn my blog into a free exploit feed,Rude to users, generous to attackers Bad trade.
+If you read [my earlier post on the death of the 90 day disclosure policy](https://blog.himanshuanand.com/2026/05/the-90-day-disclosure-policy-is-dead/), you saw story one: I found a bug, sent it in and the triage team replied, "you are reporter eleven".
 
-The issue has since been patched properly and the public databases now have the right shape of the bug. Now I can tell the full story, This is the "10 people found my bug before me" follow up I promised.
+I left the technical details vague because I did not want to accidentally turn my blog into a free exploit feed. Rude to users, generous to attackers. Bad trade.
+
+The issue has now been patched, the public records exist and users have had time to update. So this is the technical epilogue I promised: the bug, the patch, the duplicate reports and the uncomfortable question hiding behind reporter number 11.
+
+I am calling it an epilogue because another article in this series already called itself the "final" post. Apparently my blog series has the same relationship with the word final that software projects have with `final_v2_really_final.zip`.
 
 ## the story (the one I hinted at)
 
-Late April 2026. I was poking at WordPress plugins, looking at payment integrations specifically. Payment code is interesting because the security cost of a bug is real money, the attack surface is usually public and the developers often glue together third party SDKs in ways that miss one tiny very important thing. WPForms is one of the biggest form plugins on WordPress so I figured the code would be well audited, Mostly.
+Late April 2026. I was poking at WordPress plugins and looking specifically at payment integrations.
+
+Payment code is interesting audit territory because the security cost of a bug can be real money, the attack surface is often public and developers have to glue several third-party systems together without dropping one tiny, extremely important check on the floor.
+
+WPForms is one of the biggest form plugins on WordPress, so I assumed the code would be well audited.
+
+Mostly.
 
 Mostly is doing a lot of work in that sentence.
 
-I opened the PayPal Commerce integration folder and grep for `permission_callback`. That is the WordPress way of saying "who is allowed to hit this endpoint" was looking for the usual mistakes. Within about 90 seconds I had this:
+I opened the PayPal Commerce integration folder and searched for `permission_callback`. In WordPress REST routes which is the part that answers a useful question: "who is allowed to hit this endpoint?"
+
+Within about 90 seconds, I found this:
 
 ```php
 register_rest_route(
@@ -41,102 +59,144 @@ register_rest_route(
 );
 ```
 
-`__return_true` The endpoint is open to the world, this by itself is not a bug as Webhook endpoints have to be open. PayPal cannot log in to your WordPress site, type the captcha and whisper "please process my payment" into wp-admin. The bug is what happens after the request lands.
+`permission_callback => '__return_true'` means the endpoint is publicly reachable. That is not automatically a vulnerability. Webhook endpoints have to be public. PayPal cannot log in to your WordPress site, complete a CAPTCHA and whisper "please process my payment" into `wp-admin`.
 
-When I followed the callback handler reads the raw body, parses JSON, checks the event type against a public allowlist and then hands the payload to the appropriate handler. In the vulnerable versions, nowhere in that chain did it verify that the request actually came from PayPal.
+The security question is what happens **after** the request arrives.
 
-No `Paypal-Transmission-Sig` validation, No PayPal verify-webhook-signature call and No useful rejection path for a totally unsigned request. The endpoint was basically saying "if you can spell `PAYMENT.CAPTURE.COMPLETED`, please come in the money room is to your left".
+I followed the callback. The handler read the raw request body, decoded the JSON, checked the event type against an allowlist and sent the payload to the relevant event handler.
 
-I built a one liner curl command, tested it on a local install and It worked first try. The order in my test database flipped state and payment-completed side effects fired, COOL!! right? I completed the writeup and share it for the fix.
+In the affected versions, I could not find the step that established that the request had actually come from PayPal before the event was processed.
 
-Then the triage email came back. Yeah, they knew about this issue It was first reported weeks earlier and I was reporter eleven.
+No validation of PayPal's transmission signature. No verification callback to PayPal before processing. No meaningful rejection path for a completely unsigned request.
+
+The endpoint was basically saying:
+
+> If you can spell `PAYMENT.CAPTURE.COMPLETED`, please come in. The money room is to your left.
+
+I built a curl request and tested it against a local installation I controlled. It worked on the first attempt. The matching payment record changed state and the payment-completed side effects ran.
+
+Well, cool in the very specific security-research sense where "cool" means "I now have paperwork and somebody else has a patch to write."
+
+
+The triage reply on my report.
+
+They already knew. The first report had arrived weeks earlier and mine was report number eleven.
 
 ![reporter 11 of 11](https://blog.himanshuanand.com/images/11_submittions.png)
 
-*the moment you realize 10 other people beat you to the same bug. yes I screenshotted it and yes it stings the previous post talked about this exact pattern, this is the bug behind that story.*
+*the moment you realise 10 other people beat you to the same bug. yes, I screenshotted it. yes, it stings. and yes, this is the exact bug behind the story in my previous post.*
 
-Here is where my original mental model was wrong and why I am writing this corrected version carefully. At first I tied this to the earlier public CSRF advisory, **CVE-2026-40764**, fixed in 1.10.0.3. That was related in the broad "payment integration security went sideways" sense, but it was not the final public record for this PayPal webhook forgery issue. The actual missing PayPal webhook authentication issue is now tracked publicly as **CVE-2026-4986** and fixed in **1.10.0.5**.
+There was one more correction I had to make. My first mental mapping connected this behavior to **CVE-2026-40764**, a separate CSRF issue fixed in 1.10.0.3. That was related only in the broad "payment integration security went sideways" sense. It was not the public record for the webhook-forgery behavior I reproduced.
 
-So the timeline looks like this:
+The payment-state issue discussed in this post is publicly tracked as **CVE-2026-4986** and fixed in **1.10.0.5**.
 
-- PayPal Commerce support landed in WPForms Lite 1.10.0.1.
-- Versions 1.10.0.1 through 1.10.0.4 had the missing PayPal webhook authenticity check.
-- A separate CSRF issue was fixed in 1.10.0.3.
-- The PayPal webhook forgery issue was fixed in 1.10.0.5.
-- Public databases now list the webhook bug as `WPForms Lite < 1.10.0.5 - Unauthenticated PayPal Webhook Forgery`, CVE-2026-4986.
+The corrected timeline is:
 
-This is the part where I tap the sign: always re check the final advisory before publishing. The CVE spreadsheet goblin is not your QA team.
+- WPForms introduced PayPal Commerce in **version 1.10.0 on March 17, 2026**.
+- Public CVE data identifies **1.10.0.1 through 1.10.0.4** as affected by CVE-2026-4986.
+- CVE-2026-40764 was a separate CSRF issue affecting earlier releases and fixed in 1.10.0.3.
+- WPForms **1.10.0.5**, released on May 12, 2026, fixed the webhook-authentication issue.
+- **CVE-2026-7792** separately describes forged PayPal subscription-state events through the same broad unauthenticated webhook trust boundary.
+
+The feature-introduction version and the published affected-version range are two different facts. I am keeping both explicit instead of asking the CVE spreadsheet goblin to infer one from the other.
+
+> **Public-record note:** This article focuses on the payment-state behavior tracked as CVE-2026-4986. CVE-2026-7792 separately describes subscription state manipulation through the PayPal Commerce webhook path. CVE-2026-48835 is a broader broken-access-control record fixed in 1.10.0.5 but its public description is too sparse for me to map confidently to the exact behavior in this post. Three CVEs walked into one webhook path and made everyone do extra paperwork.
+
+This is the part where I tap the sign:
+
+> Always re-check the final advisory before publishing. The CVE spreadsheet goblin is not your QA team.
 
 ## quick refresher: what a webhook is and why it needs a signature
 
-If you already write webhooks for a living, skip this section. If not, stay with me, because once you understand the model the bug becomes obvious.
+If you write webhook handlers for a living, you can skip this section and spend the saved time checking one of yours.
 
-A webhook is a callback over HTTP Service A wants to tell Service B that something happened. Maybe PayPal wants to tell WordPress that a customer just paid. The naive way to do this would be for WordPress to keep asking PayPal "did anything new happen?" every few seconds. That is called polling and it is wasteful. The smarter way is for PayPal to call WordPress when something happens is a webhook call.
+For everyone else: a webhook is an HTTP callback. Service A wants to tell Service B that something happened. PayPal wants to tell WordPress that a customer paid, a payment failed or a subscription changed.
 
-The mechanics are simple WordPress exposes a URL, PayPal makes an HTTP POST to that URL with a JSON body describing the event. WordPress reads the body, does something, returns 200 OK.
+The slow way would be for WordPress to keep asking PayPal, "did anything happen yet?" every few seconds. That is polling. It works, but it has the energy of a child asking "are we there yet?" for the entire drive.
 
-The problem: the URL has to be public which means anyone on the internet can reach it. So if WordPress just trusts whatever shows up at that URL, then anyone can pretend to be PayPal.
+The smarter pattern is for PayPal to call WordPress when something happens.
 
-Every webhook provider knows this, that's why every webhook provider gives you a way to verify the source. 
-The two common patterns are
+The mechanics are simple:
 
-**HMAC signatures.** The provider has a secret shared with the receiver. When they send a webhook, they compute an HMAC of the body using that secret and put it in a header. The receiver recomputes the HMAC, compares the two, accepts the request only if they match. Stripe does this with the `Stripe-Signature` header. Square does this with `X-Square-HmacSha256-Signature`. This pattern is fast, stateless and well understood.
+	1. WordPress exposes a URL.
+	2. PayPal sends an HTTP POST request to that URL.
+	3. The request body describes the event.
+	4. WordPress verifies it, processes it and returns a response.
 
-**Provider signature verification.** PayPal's webhook model includes headers like `Paypal-Transmission-Sig`, `Paypal-Cert-Url`, `Paypal-Transmission-Id`, `Paypal-Transmission-Time` and `Paypal-Auth-Algo`. The receiver can verify the signature itself or call PayPal's `/v1/notifications/verify-webhook-signature` endpoint and let PayPal validate it server side.
+The problem is that the URL has to be reachable from the internet. If WordPress trusts whatever appears at that URL, anyone can pretend to be PayPal.
 
-In both the patterns, the rule is the same: if you do not verify, you do not trust. A webhook handler that does not verify is just a public API endpoint that mutates payment state.
+That is why providers document ways to verify webhook authenticity. PayPal documents two broad approaches: verify the transmission cryptographically using the delivery headers or send the event details back to PayPal's `verify-webhook-signature` endpoint for verification.
 
-Here is the asymmetry in one picture.
+Other providers use the same security idea with different packaging. Stripe uses a `Stripe-Signature` header and Square uses its own HMAC signature. Different logos, same rule:
+
+> If you do not verify, you do not trust.
+
+A webhook handler without authenticity verification is just a public API endpoint that changes state while wearing a payment-provider name badge.
+
+Here is the whole asymmetry in one picture:
 
 ```text
 ================================================================
-  HOW IT SHOULD WORK (stripe, square, properly built webhooks)
+  HOW IT SHOULD WORK
 ================================================================
 
-  [Anyone]    --POST body, no signature-->   [Server]
-                                                 |
-                                                 v
-                                            verify signature?  FAIL
-                                                 |
-                                                 v
-                                            reject, no DB change
+  [Anyone]    --POST body, no valid proof-->  [Server]
+                                                  |
+                                                  v
+                                             verify sender?  FAIL
+                                                  |
+                                                  v
+                                             reject, no DB change
 
 
-  [PayPal]    --POST body + signature-->     [Server]
-                                                 |
-                                                 v
-                                            verify signature?  PASS
-                                                 |
-                                                 v
-                                            update DB, fire hooks
+  [PayPal]    --POST body + valid proof-->    [Server]
+                                                  |
+                                                  v
+                                             verify sender?  PASS
+                                                  |
+                                                  v
+                                             validate fields
+                                             update DB
+                                             fire hooks
 
 
 ================================================================
-  HOW WPFORMS PAYPAL DID IT BEFORE 1.10.0.5
+  AFFECTED WPFORMS PAYPAL FLOW
 ================================================================
 
-  [Anyone]    --POST forged JSON-->          [Server]
-                                                 |
-                                                 v
-                                            json_decode( body )
-                                            check event_type (public allowlist)
-                                            check status   (attacker controlled)
-                                            check amount   (knowable from the form)
-                                                 |
-                                                 v
-                                            update DB, fire hooks
-                                            "congratulations, fake money"
+  [Anyone]    --POST forged JSON-->           [Server]
+                                                  |
+                                                  v
+                                             json_decode( body )
+                                             check event_type
+                                             check status
+                                             check amount
+                                                  |
+                                                  v
+                                             update DB
+                                             fire hooks
+                                             "congratulations, fake money"
 ```
 
-The top block is how every webhook in the world is supposed to work. The bottom block is what the WPForms PayPal handler did before 1.10.0.5. The server could not tell `[Anyone]` apart from `[PayPal]` because it never validated the PayPal signature before processing the event.
+The top block authenticates the sender before trusting the story.
 
-## the wpforms paypal webhook in one paragraph
+The bottom block checked whether the story looked plausible, but not who was telling it.
 
-The WPForms PayPal Commerce integration registers a REST route under `/wp-json/wpforms/ppc/webhooks/` with `permission_callback => '__return_true'`. The same handler can also be reached through a fallback URL parameter, depending on the webhook communication setting, so this was not only a "REST API is public" story. The handler reads the request body, JSON decodes it, checks the event type against a public allowlist and dispatches to a per-event-type handler. In vulnerable versions, the `PAYMENT.CAPTURE.COMPLETED` handler could update the matching payment record and fire downstream payment-completed actions without the request being authenticated as PayPal.
+That distinction is the whole article:
 
-## the missing check (the whole bug in 6 lines, spiritually)
+> Payload validation checks whether the story is internally consistent. Signature verification checks who is telling the story.
 
-The exact patch WPForms shipped in 1.10.0.5 is slightly more complex because it handles different connection modes.
+## the WPForms PayPal webhook in one paragraph
+
+The WPForms PayPal Commerce integration registered a REST route under `/wp-json/wpforms/ppc/webhooks/` with `permission_callback => '__return_true'`. Depending on the configured communication mode, a fallback listener could also reach the webhook-processing path, so this was not just a story about the REST API being public. The handler read the request body, decoded the JSON, checked the event type and dispatched it to a per-event handler. In the affected path I tested, a matching payment record could be updated without the request first being authenticated as a genuine PayPal event.
+
+Public route: normal.
+
+Public route that trusts unsigned payment events: considerably less normal.
+
+## the missing check (the whole bug in six lines, spiritually)
+
+The exact production patch has to handle more than one connection mode, but the missing security boundary can be expressed like this:
 
 ```php
 $payload = file_get_contents( 'php://input' );
@@ -148,40 +208,58 @@ if ( ! $this->verify_webhook_signature( $payload ) ) {
 $event = json_decode( $payload, false );
 ```
 
-That is the whole bug, absence of the verification step is what made the endpoint exploitable. Every check after that is only checking the shape of the story. The signature check asks who is telling the story.
+Authenticate first. Decode and process second.
 
-## the four placebo checks that do not save you
+That is the whole bug, spiritually.
 
-When I sent the report, I expected the response to argue back. They usually point at some check in the code path and say "see, we do validate, the attacker cannot just forge anything". WPForms had several check and None of them replaced webhook authentication.
+Every check after JSON decoding can test the **shape** of the story. The authenticity check asks **who is telling it**.
 
-| Check | Why it does not stop an attacker |
-|-------|----------------------------------|
-| `event_type` allowlist | The allowlist values are hardcoded. Anyone can read them. The attacker picks a supported PayPal event and moves on. |
-| Existing payment lookup | This limits the attacker to payment IDs or transaction IDs that exist. It does not prove the event came from PayPal. |
-| Status checks | If the status comes from the JSON body, the attacker controls it. Putting `COMPLETED` in the payload is not a security achievement. It is typing. |
-| Amount checks | Amount checks reduce sloppy forgeries. They do not authenticate the sender. A public form can leak or imply the amount. A real pending payment already has it in the DB. |
+## the four checks that looked like security from across the room
 
-These checks restrict what the attacker can target. They do not check whether the request actually came from PayPal that is the whole point of webhook signature verification.
+When reviewing a path like this, it is easy to find several checks and feel reassured. The handler did validate parts of the event. Those checks were useful, but none of them established that PayPal sent the request.
+
+| Check | What it helped with | What it did not prove |
+|-------|---------------------|-----------------------|
+| `event_type` allowlist | Limited processing to supported event names. | That PayPal sent the event. The allowed names were readable from the code. |
+| Existing payment lookup | Limited changes to a matching transaction or payment record. | That PayPal authorised the change. |
+| Status checks | Rejected statuses the handler did not expect. | That the supplied status came from PayPal. Putting `COMPLETED` in JSON is not a security achievement. It is typing. |
+| Amount checks | Reduced sloppy or inconsistent forgeries. | That the sender was authentic. A real pending record already contains the amount, and some form prices may be public or inferable. |
+
+These checks constrained the payload. They did not authenticate its source.
 
 ![security theater meme: airport screening but they only check your ticket spelling](https://blog.himanshuanand.com/images/airport.png)
 
-*if you have to spell PAYMENT.CAPTURE.COMPLETED correctly to forge a payment, that is not security that is a spelling bee with financial consequences.*
+*if you have to spell `PAYMENT.CAPTURE.COMPLETED` correctly to forge a payment event, that is not source authentication. that is a spelling bee with financial consequences.*
 
-There is also a subtle one I want to call out separately because it makes the impact feel worse. Inside webhook processing, code often has to run without a logged in user, meaning capability checks in downstream payment code can get weird If a webhook path temporarily treats itself as trusted, that is fine only when the webhook path is actually authenticated. If the entry point is unauthenticated, then the code path welcomes all including bad people.
+There is a second trust issue worth calling out. Webhook processing normally happens without a logged-in WordPress user. Downstream payment code may therefore run in a trusted system context or bypass capability checks that would make no sense for a webhook.
+
+That can be perfectly reasonable **after the webhook has been authenticated**.
+
+Without authentication, the path is effectively saying: "No user account? No problem. The JSON has a lanyard."
 
 ## proof of concept
 
-I am keeping this PoC at the level needed to explain the bug, not at the level needed to make random WordPress shops have a bad afternoon. The public advisory already has a minimal example for the denied path and the fixed version rejects unsigned payloads now.
+I tested only against a local installation that I controlled. The public advisory already contains a minimal request for the denied-payment path, and fixed versions reject unauthenticated events.
 
-Step 1: the route existed publicly.
+I am keeping this at the level needed to explain and reproduce the fixed bug in a lab, not at the level needed to make random WordPress shops have a bad afternoon.
+
+### step 1: confirm that the route exists
 
 ```bash
 curl -i 'https://TARGET/wp-json/wpforms/ppc/webhooks/?verify=1'
 ```
 
-If the route was registered, this verification helper could return success. Important note: an open webhook route is normal. The bug was not "route is public". The bug was "route is public and then trusts unsigned payment events".
+That check establishes reachability. It does not prove a vulnerability. A publicly reachable webhook route is expected.
 
-Step 2: before 1.10.0.5, a forged PayPal event could be posted without PayPal signature headers.
+The bug was not:
+
+> the route is public.
+
+The bug was:
+
+> the route is public and then processes unsigned payment events.
+
+### step 2: send an unsigned event to an affected local build
 
 ```bash
 curl -i -X POST 'https://TARGET/wp-json/wpforms/ppc/webhooks/' \
@@ -195,142 +273,205 @@ curl -i -X POST 'https://TARGET/wp-json/wpforms/ppc/webhooks/' \
   }'
 ```
 
-That request has no `Paypal-Transmission-Id`, no `Paypal-Transmission-Sig`, no `Paypal-Transmission-Time`, no `Paypal-Cert-Url` and no `Paypal-Auth-Algo`. A genuine PayPal webhook would include the verification material. Vulnerable WPForms versions did not validate it before processing.
+That request has no `Paypal-Transmission-Id`, no `Paypal-Transmission-Sig`, no `Paypal-Transmission-Time`, no `Paypal-Cert-Url` and no `Paypal-Auth-Algo`.
 
-In my local testing I used the completed payment path too, with a matching transaction and amount, to show the integrity impact. The key point is the same for both paths: the server accepted the event because the JSON looked right, not because PayPal said it was real.
+A genuine PayPal delivery includes verification material. The affected handler processed the event without first validating that material.
+
+In a separate local test, I exercised the completed-payment path using a matching transaction and amount. The payment record changed state and the downstream completion actions ran.
+
+The important point is the same for both paths: the server accepted the event because the JSON looked internally consistent, not because PayPal had proved it was genuine.
 
 ![terminal screenshot of the curl request and the 200 OK response](https://blog.himanshuanand.com/images/response.png)
 
-*the exploit shape, in one screen. forged request in, payment state changes out, no PayPal in the room, just vibes and JSON.*
+*the exploit shape in one screen: unsigned request in, accepted response out, no PayPal in the room just vibes and JSON.*
 
-## the fallback url that does not need the rest api
+One embarrassing housekeeping note: the HTTP `Date` header visible in this old screenshot does not match the 2026 release timeline. M keeping the original image because it was part of the original write up, but I am not asking anyone to treat that timestamp as evidence. Apparently the lab server also wanted to demonstrate time travel. The request shape is public nd the security claim rests on the code path, the local state change and the advisory not on that header.
 
-Some WordPress hardening guides recommend disabling the REST API for unauthenticated users. WPForms also had a fallback listener path for webhook delivery when REST was not the selected communication method. In vulnerable versions, that fallback reached the same handler and therefore had the same missing PayPal verification problem.
+## the fallback URL that did not need the REST API
 
-That matters because "we disabled REST" is a very common WordPress security blanket. Sometimes it is useful and sometimes not.
+Some WordPress hardening guides recommend disabling unauthenticated REST API access. That can reduce some attack surface, but it is not magic dust.
 
-The lesson is simple when you build a fallback path, the fallback path needs the same security as the primary path.A fallback that skips the primary path's checks is not a fallback.
+WPForms also supported a fallback webhook listener for installations using a non-REST communication mode. In the affected code path I reviewed, the fallback reached the same webhook-processing logic and therefore inherited the same missing authenticity check.
 
-## the same plugin gets stripe and square right
+That matters because "we disabled REST" is a very common WordPress security blanket. Sometimes the blanket is warm. Sometimes the window is still open.
 
-Here is the part that makes the bug feel weirdest WPForms knew how to verify webhooks, they did it for Stripe (After 1 similar CVE), they did it for Square. PayPal was the one that missed the check.
+The lesson is simple: a fallback path needs the same security property as the primary path.
 
-The clearest way to see it is to put the handlers side by side. Both register public webhook routes with `permission_callback => '__return_true'`. Both read the raw body. What happens after that line is the whole bug.
+A fallback that skips the primary path's trust boundary is not a fallback. It is a side door with excellent documentation.
+
+## the same plugin got Stripe and Square right
+
+Here is the part that made the PayPal path stand out: in the code I reviewed, WPForms already knew the correct webhook pattern.
+
+Stripe authenticated the incoming event before trusting it. Square used provider-specific signature verification before processing. PayPal was the odd one out.
+
+A simplified comparison looks like this:
 
 ```diff
-# both files start with the same idea:
+# both paths begin by reading the raw request body
   $this->payload = file_get_contents( 'php://input' );
 
-# Stripe handler
+# Stripe-shaped flow
 + $event = Webhook::constructEvent(
 +     $this->payload,
 +     $this->get_webhook_signature(),
 +     $this->get_webhook_signing_secret()
 + );
-+ // bad signature throws and the event is rejected
++ // invalid signature throws; event processing stops
 
-# PayPal handler before 1.10.0.5
-- // no PayPal webhook signature verification before processing
+# affected PayPal-shaped flow
+- // no equivalent sender-authentication step here
   $event = json_decode( $this->payload, false );
 ```
 
-Square also had the right shape It validates the Square HMAC signature with Square's webhook helper before trusting the event. Same pattern, different provider. That asymmetry is the hint that this was an oversight rather than a grand philosophical statement about trusting strangers on the internet.
+Square followed the same general rule with Square's verification helper: authenticate the provider before trusting the event.
 
-## what the actual patch did
+Same project. Same broad problem. Different security boundary.
 
-WPForms 1.10.0.5 added signature verification before JSON decoding and event dispatch.
+That kind of internal asymmetry is gold during a code review. It is often the difference between "this project has a deliberate design" and "someone forgot the important line on a Tuesday."
 
-The important bit looks like this:
+I am assuming oversight here, not a grand philosophical statement about trusting strangers on the internet.
+
+## the patch analysis
+
+WPForms 1.10.0.5 added a verification guard before event decoding and dispatch.
+
+The important shape is:
 
 ```php
-// Verify the webhook signature before processing.
 if ( ! $this->verify_webhook_signature( $this->payload ) ) {
     throw new RuntimeException( 'Webhook signature verification failed.' );
 }
 ```
 
-Then `verify_webhook_signature()` routes based on connection type:
+The real implementation has to account for different connection and forwarding modes, so the production code is more complicated than my six line spiritual patch.
 
-- Legacy PayPal Commerce addon connections call the addon's PayPal webhook verification method.
-- Product API forwarded webhooks validate `X-WPForms-Signature` and `X-WPForms-Timestamp` using HMAC-SHA256 and reject old timestamps to reduce replay risk.
 
-The final patch is not exactly the six line "call PayPal directly" sketch I originally had in my report. WPForms has its own Product API forwarding model for some connections, so the patch verifies the signature appropriate to that path. The security property is the same: unsigned random JSON from the internet no longer gets to mutate payment state.
+The security property is what matters:
+
+> Unsigned random JSON from the internet no longer gets to change payment state.
+
+The patch did not need a wizard a machine learning model or a blockchain. It needed the webhook equivalent of checking the person's ID before giving them the keys.
 
 ## what 10 duplicate reports actually means
 
-This bug got reported by 11 of us according to my triage thread. Let me stop and think about what that number actually tells us.
+According to the triage response, eleven researchers submitted this issue.
 
-The vendor sees 11 unrelated researchers, all reporting the same root cause, in totally different words, through different intake channels, some using AI assistance and some not. The probability that everyone who finds a bug like this reports it is zero. The actual base rate for "researchers who find a bug and report it" versus "people who find a bug and do something else" is unknown but it is definitely not 100%.
+That number tells us something precise: independent discovery converged on the same trust failure at least eleven times.
 
-If you take an optimistic 50% report rate, 11 reports means roughly 22 finders. If you take a more pessimistic 20% rate, it is more like 55 finders. These are not scientific numbers Please do not put them in a Gartner quadrant. The point is directionally obvious: the visible reporters are not the whole population.
+It does **not** tell us how many people found it in total. We do not know the reporting rate. We do not know how many people saw it and moved on, assumed it was already reported, kept it private or chose a less friendly use for it.
 
-Now read that again with attacker incentives in mind, A bug like this touches payment state. It does not need admin access it runs against a public endpoint. There is no exotic browser chain. It is a webhook handler trusting a stranger with a clipboard.
+I could invent a 50% reporting rate and announce 22 finders. I could invent a 20% rate and announce 55. I am not doing that. Those numbers would be vibes wearing a spreadsheet, and nobody should put them in a Gartner quadrant.
 
-This is the part of the 90 day disclosure model that I keep coming back to. The model assumes the people finding a bug are mostly the same set as the people reporting it. The model assumes the gap between "first find" and "second find" is large enough that the vendor's patch can ship before the second person knows.
+The defensible conclusion is simpler:
 
-If 11 of us found the same bug, the right question is not "why so many duplicates". The right question is "where are the other ones".
+> Eleven reports are a lower bound, not the whole finder population.
+
+Now read that with attacker incentives in mind. This was a public payment endpoint. No administrator account was required to reach it. No exotic browser chain. No twelve-step race condition that works only during a solar eclipse.
+
+It was a webhook handler trusting a stranger with a clipboard.
+
+This is the part of the 90-day disclosure model that I keep returning to. The model tends to focus on the time between the first report and the public disclosure. But the risk clock also includes every independent rediscovery after report number one.
+
+By the time I arrived, the same trust boundary had already attracted ten other reports.
+
+If eleven of us reported it, the useful question is not only:
+
+> Why were there so many duplicates?
+
+It is also:
+
+> How many people found it and never joined the queue?
 
 ![iceberg meme: 11 reporters above water, unknown attackers and unreported finders below](https://blog.himanshuanand.com/images/iceberg.jpg)
 
-*the 11 of us who reported are the part above the waterline. the part below the waterline is the people who found the same bug and chose to do something else with it nobody knows how big that part is that is the problem.*
+*the 11 visible reporters are above the waterline. below it is an unknown population: people who found the same bug and did something else, or nothing at all. the meme is not a measurement. it is a reminder that the queue only shows the people who entered the queue.*
+
+A duplicate wave is not proof that a vulnerability was exploited. It is evidence that the vulnerability was rediscoverable.
+
+Those are different claims, and both matter.
 
 ## lessons for bug finders
 
-For people who do this kind of work, a few things I want to put in writing.
+For people who do this kind of work, here are the lessons I want to keep in writing.
 
-**Grep for `permission_callback` first.** In WordPress plugin audits, this is the single most productive grep you can run. `__return_true` is the WordPress equivalent of "no WordPress auth". Every match deserves a look at what the callback does. If the callback mutates state, you might be five minutes away from a finding.
+**Search for `permission_callback` early.** In a WordPress plugin review, it is a productive starting point. `__return_true` means the route does not require ordinary WordPress authentication. Every match deserves a look at what the callback actually does.
 
-**Do not stop at `__return_true`.** Webhook endpoints are supposed to be public. The question is not "can anyone reach this". The question is "after they reach it, how does the plugin prove they are the provider". Public route plus signature verification is normal. Public route plus vibes is a bug.
+**Do not stop at `__return_true`.** Webhook routes are supposed to be public. The question is not merely "can anyone reach this?" The question is "after they reach it, how does the plugin prove they are the provider?" Public route plus signature verification is normal. Public route plus vibes is a bug.
 
-**Look for asymmetries inside one project.** If a plugin verifies Stripe webhooks but not PayPal webhooks, that asymmetry is a bug shape. Same logic applies to any pair of "the same kind of thing done two different ways". File downloads handled one way in one route and a different way in another. User input validated in one form and not the other. Authentication checks present in one endpoint and missing in the next. Project internal asymmetries are gold.
+**Look for asymmetries inside one project.** If Stripe authenticates before processing and PayPal does not, that difference deserves attention. The same trick works elsewhere: one download route checks permissions and another does not; one form validates input and its sibling trusts it; one integration rejects replayed events and another accepts them forever. Project-internal asymmetries are gold.
 
-**Fallback paths deserve their own audit.** Every time you find a security check in the main path, look for a fallback that skips it. Plugins love fallbacks. URL parameters, query strings, alternate endpoints, legacy compatibility shims. The fallback is often where the careful path's checks got forgotten.
+**Audit fallback paths separately.** Plugins love alternate routes, URL parameters, forwarding modes, legacy compatibility layers and emergency side doors labelled "temporary" since 2019. Every fallback needs the same trust boundary as the primary path.
 
-**The CVE classification might not match the actual bug.** Reporters do not always control how the bug gets classified in public databases. In this case, there was an earlier CSRF entry and a later webhook forgery entry. Those are not the same thing. Test the patch yourself. Do not assume "patched in 1.10.0.3" means "the webhook auth gap is closed". Re-run the proof of concept and Verify CVE database is not your QA team.
+**Do not let the CVE label replace your own verification.** Public records can overlap, change or describe different parts of the same code path. Re-run the original proof of concept against the patched version. The CVE database is useful. It is not your QA team.
 
-**Submit anyway, even when it is a dupe.** I am reporter 11 and I will probably get zero credit on the CVE and zero bounty money. The signal to the vendor of "10 of us think this is real, plus reporter 11 is also here waving a tiny flag" is more useful than 10 alone. Vendors do prioritize by report count Show up.
+**Submit a solid report even when you suspect a duplicate.** I was reporter 11. I will probably receive no public CVE credit and no bounty for being eleventh through the door. That is fine. Another well-supported report is still evidence that independent rediscovery is happening.
+
+Ten researchers were already waving flags. Reporter eleven can still bring a tiny flag and stand next to them.
 
 ## lessons for vendors
 
-A few things for the receiving side.
+A few notes for the receiving side.
 
-**Webhook handlers are payment infrastructure, Treat them like it.** Anything that mutates payment state is at the same security tier as your card processing logic. The fact that the endpoint is "just a webhook" does not lower the bar. Webhook endpoints are public, they mutate database state, they fire side effects. They are payment infrastructure. They get the same review.
+**Webhook handlers are payment infrastructure. Treat them like it.** A public endpoint that can change payment state or trigger fulfilment actions belongs in the same security conversation as the rest of the payment flow. "It is just a webhook" is how the webhook ends up running the business.
 
-**Build a verification helper once, use it everywhere.** Every payment integration in a plugin should call into a provider-specific verification helper before processing. If a new integration ships without a call to that helper, the security review should reject the patch.
+**Build verification once and make it unavoidable.** Every provider integration should pass through a provider-appropriate authenticity check before event dispatch. If a new integration can reach a payment handler without crossing that guard, the design has made the dangerous path too easy.
 
-**Document your fallback URLs in the threat model.** If you have a fallback path for sites that disable the REST API, write down what it does and what it skips. Run the same security checks against the fallback that you run against the primary route. Add a test that proves the fallback rejects invalid signatures.
+**Put fallback URLs in the threat model.** REST endpoints, query-parameter listeners, forwarded webhooks and legacy modes should all enforce the same security property. Add negative tests showing that missing, invalid and stale verification material is rejected wherever appropriate.
 
-**Beware of trusted webhook scopes.** If your webhook path bypasses normal user capability checks because webhooks do not have users, then the entry point must be authenticated before the bypass starts. Otherwise the bypass becomes an admin costume for unsigned JSON.
+**Be careful with trusted webhook contexts.** A webhook may need to run without a logged-in user and may legitimately bypass user capability checks. That makes authenticating the entry point more important, not less. Otherwise the trusted context becomes an admin costume for unsigned JSON.
 
-**Test the patch by re-running the original PoC.** I know this sounds obvious but It is not obvious enough. Patches that fix a CSRF interpretation of a webhook bug do not fix the underlying webhook auth gap. Re run the original PoC against the patched build. If it still works, the patch is incomplete.
+**Re-run the original proof of concept against the patch.** I know this sounds obvious. It remains not obvious enough. A patch that fixes a nearby CSRF condition does not necessarily fix an unauthenticated webhook trust boundary. Test the exact thing the reporter demonstrated.
+
+**Treat duplicate volume as a rediscovery signal.** Eleven reports do not prove exploitation. They do show that multiple researchers could independently find the same flaw. That should increase urgency, not merely increase the size of the duplicate folder.
 
 ## final thoughts
 
-This bug is small, The fix is small but install base is not small. (Horror triangle of WordPress plugin security)
+Small bug and small patch but the product reach was not small.
 
-The important correction to my earlier notes is this: the PayPal webhook forgery was not finally fixed in 1.10.0.3. It was fixed in 1.10.0.5. The public CVE I should point to for this post is **CVE-2026-4986**, not the earlier CSRF CVE. I am writing that plainly because future me will absolutely forget and try to be clever again.
+That is the horror triangle of WordPress plugin security: tiny mistake, tiny patch, enormous distribution. (Mentally insert Horror meme here)
 
-What this bug is not small in is what it tells us about the industry, The plugin is in 5 million plus installs. The asymmetry with Stripe and Square is visible to anyone who reads the source for ten minutes. The bug class is one of the oldest in the webhook world. The number of duplicate reports is the kind of number that should make triage teams sit up straight and spill coffee on the keyboard.
+The important correction to my earlier notes is straightforward. The PayPal webhook forgery issue discussed here was fixed in **1.10.0.5**, and the public record I should point to is **CVE-2026-4986**, not the earlier CSRF CVE.
 
-Same theme as my last post, old assumptions are not holding. If 11 of us can find the same bug in a short window using totally unrelated workflows, then the public disclosure system is leaving real risk on the table. Not in some abstract panel-discussion sense. In the very practical sense that a public payment webhook endpoint trusted unsigned JSON until 1.10.0.5.
+I am writing that plainly because future me will absolutely forget, open six tabs, become overconfident and try to be clever again.
 
-If you run a site using WPForms PayPal Commerce, update to 1.10.0.5 or later. Honestly, update to the latest version. Then look at your payment logs, Look for weird PayPal status transitions. Look for completed or denied events that do not line up with PayPal's side. If you do not log webhook headers, start now. And if you are a security researcher who already found this and never reported it because you assumed someone else would, well. You were right as Ten other people did still Report the next one.
+The larger lesson is reporter number 11.
 
-If you are still reading this, you are awesome. Thanks for sticking with me.
+WPForms had more than 5 million active installations, although that does not mean 5 million exploitable PayPal configurations. The trust failure was in a public payment path. Similar integrations in the same project showed the correct authentication pattern. At least eleven researchers independently submitted the issue.
+
+That is the kind of duplicate count that should make a triage team sit upright and spill coffee on the keyboard.
+
+The old disclosure assumptions are under pressure. When many people can independently find the same bug in a short period, the vendor is not racing only the publication deadline. It is racing rediscovery.
+
+For site owners, the action is simple: update WPForms to the latest available version. Do not stop at 1.10.0.5 just because it is the first fixed release; use the current supported release. Then reconcile suspicious PayPal status changes against PayPal's own records. Look for completed, denied, cancelled or reactivated states that do not line up. If you log webhook headers, preserve them. If you do not, this is a good time to start thinking about it.
+
+For researchers: submit the next one even when you suspect somebody already did.
+
+For vendors: a duplicate is not merely administrative noise. Sometimes it is the sound of the same door being found over and over again.
+
+And if you are still reading this, you are awesome. Thanks for sticking with me through the webhooks, the duplicate queue, the spreadsheet goblin and the time travelling lab server.
+
+What is the highest duplicate count you have seen on a vulnerability report and did it change how the vendor responded?
 
 ---
 
 related posts:
 
-- [the 90 day disclosure policy is dead](https://blog.himanshuanand.com/2026/05/the-90-day-disclosure-policy-is-dead/) (the framing post for this one)
+- [the 90 day disclosure policy is dead](https://blog.himanshuanand.com/2026/05/the-90-day-disclosure-policy-is-dead/) (the framing post)
+- [defender playbook for the LLM era](https://blog.himanshuanand.com/2026/06/defender-playbook-for-the-llm-era/) (the fourth and final numbered post; this article is the technical epilogue because apparently "final" needed a patch release)
 
 references:
 
-- [CVE-2026-4986](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-4986)
-- [WPScan advisory: WPForms Lite < 1.10.0.5 - Unauthenticated PayPal Webhook Forgery](https://wpscan.com/vulnerability/1d99eed6-9a16-4d5a-90f9-ab604dfd5b92/)
-- [WPForms changelog](https://wordpress.org/plugins/wpforms-lite/#developers)
-- [PayPal webhook signature verification docs](https://developer.paypal.com/api/rest/webhooks/rest/#link-verifywebhooksignature)
+- [CVE-2026-4986 : NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-4986)
+- [CVE-2026-7792 : NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-7792)
+- [CVE-2026-40764 : NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-40764)
+- [CVE-2026-48835 : NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-48835)
+- [WPScan advisory: WPForms Lite < 1.10.0.5 Unauthenticated PayPal Webhook Forgery](https://wpscan.com/vulnerability/1d99eed6-9a16-4d5a-90f9-ab604dfd5b92/)
+- [WPForms changelog](https://wpforms.com/docs/how-to-view-recent-changes-to-the-wpforms-plugin-changelog/)
+- [WPForms Lite on WordPress.org](https://wordpress.org/plugins/wpforms-lite/)
+- [PayPal webhook verification documentation](https://developer.paypal.com/api/rest/webhooks/rest/)
+- [WordPress Trac changeset referenced by CVE-2026-7792](https://plugins.trac.wordpress.org/changeset/3532389/wpforms-lite/trunk/src/Integrations/PayPalCommerce/Api/WebhookRoute.php?old=3486451&old_path=wpforms-lite%2Ftrunk%2Fsrc%2FIntegrations%2FPayPalCommerce%2FApi%2FWebhookRoute.php)
 
-If any of this resonated, hit me up on Twitter/X ([https://x.com/anand_himanshu](https://x.com/anand_himanshu)). If you disagree, especially hit me up.
+If any of this resonated, hit me up on Twitter/X at [@anand_himanshu](https://x.com/anand_himanshu). If you disagree, especially hit me up. Disagreement with evidence is just peer review wearing casual clothes.
 
 Thanks for reading.
