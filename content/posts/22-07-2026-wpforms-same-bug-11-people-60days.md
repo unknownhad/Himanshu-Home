@@ -1,5 +1,5 @@
 ---
-title: "Reporter #11: 10 people found the WPForms PayPal bug before me (CVE-2026-4986)"
+title: "Reporter 11: 10 people found the WPForms PayPal bug before me (CVE-2026-4986)"
 date: 2026-07-22
 tags: ["security", "wordpress", "webhooks", "paypal", "disclosure", "vulnerability-management", "blog"]
 author: "Himanshu Anand"
