@@ -42,7 +42,7 @@ Mostly.
 
 Mostly is doing a lot of work in that sentence.
 
-I opened the PayPal Commerce integration folder and searched for `permission_callback`. In WordPress REST routes which is the part that answers a useful question: "who is allowed to hit this endpoint?"
+I opened the PayPal Commerce integration folder and searched for `permission_callback`. In a WordPress REST route, that is the part that answers a useful question: “Who is allowed to hit this endpoint?”
 
 Within about 90 seconds, I found this:
 
