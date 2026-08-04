@@ -1,5 +1,5 @@
 ---
-title: "Two Parsers, One JSON, and a Flag: Intigriti's July 2026 Challenge"
+title: "Two Parsers, One JSON and a Flag: Intigriti's July 2026 Challenge"
 date: 2026-08-04
 author: Himanshu Anand
 tags: [ctf, web-security, json, parser-differential, intigriti]
