@@ -10,6 +10,7 @@ draft: false
 
 Intigriti's July challenge is called **"Canonically Yours"** and the whole bug is one silly question: what happens when you put the same key in a JSON object twice? Turns out two different bits of code answer that differently and that gap give you the flag.
 
+
 ```
 INTIGRITI{019f8700-4613-74fb-923e-781903e4bee9}
 ```
