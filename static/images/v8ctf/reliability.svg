@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Exploit reliability compared with the v8CTF requirement</title>
+  <desc id="desc">The direct package succeeded twenty percent, a separate tunnel batch fifty percent, and the requirement was eighty percent.</desc>
+  <rect width="1200" height="520" rx="20" fill="#0b0f0c"/>
+  <text x="70" y="68" fill="#f4f7f4" font-family="Arial,sans-serif" font-size="34" font-weight="700">the flag was real. the reliability was not enough.</text>
+  <text x="70" y="104" fill="#89a28e" font-family="Consolas,monospace" font-size="18">raw runs, not the number I wished the logs contained</text>
+  <g font-family="Consolas,monospace">
+    <text x="75" y="190" fill="#d5e3d7" font-size="18">direct package</text><rect x="320" y="163" width="760" height="38" rx="7" fill="#172019"/><rect x="320" y="163" width="152" height="38" rx="7" fill="#ff8a65"/><text x="1100" y="190" fill="#ff8a65" font-size="19">1/5  20%</text>
+    <text x="75" y="282" fill="#d5e3d7" font-size="18">tunnel tuning batch</text><rect x="320" y="255" width="760" height="38" rx="7" fill="#172019"/><rect x="320" y="255" width="380" height="38" rx="7" fill="#ffca56"/><text x="1100" y="282" fill="#ffca56" font-size="19">5/10 50%</text>
+    <text x="75" y="374" fill="#d5e3d7" font-size="18">v8CTF requirement</text><rect x="320" y="347" width="760" height="38" rx="7" fill="#172019"/><rect x="320" y="347" width="608" height="38" rx="7" fill="#58ff58"/><text x="1100" y="374" fill="#58ff58" font-size="19">80%</text>
+  </g>
+  <path d="M928 140V417" stroke="#58ff58" stroke-width="2" stroke-dasharray="6 6"/>
+  <text x="928" y="445" text-anchor="middle" fill="#58ff58" font-family="Consolas,monospace" font-size="16">minimum line</text>
+</svg>

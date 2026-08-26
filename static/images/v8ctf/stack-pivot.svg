@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 590" role="img" aria-labelledby="title desc">
+  <title id="title">JSPI and JDT stack cleanup mismatch</title>
+  <desc id="desc">Caller and callee disagree about argument cleanup, moving the return slot into attacker-influenced data and pivoting the stack.</desc>
+  <rect width="1200" height="590" rx="20" fill="#0b0f0c"/>
+  <text x="70" y="68" fill="#f4f7f4" font-family="Arial,sans-serif" font-size="34" font-weight="700">when caller and callee disagree by one stack frame</text>
+  <text x="70" y="104" fill="#89a28e" font-family="Consolas,monospace" font-size="18">the return address stops being where one side thinks it is</text>
+  <g font-family="Consolas,monospace">
+    <text x="120" y="160" fill="#58ff58" font-size="19">JDT EXPECTATION</text><text x="762" y="160" fill="#ffca56" font-size="19">WasmResume REALITY</text>
+    <g transform="translate(90 190)"><rect width="410" height="58" fill="#17351e" stroke="#58ff58"/><text x="20" y="36" fill="#d5e3d7" font-size="17">argument N</text><rect y="58" width="410" height="58" fill="#17351e" stroke="#58ff58"/><text x="20" y="94" fill="#d5e3d7" font-size="17">...</text><rect y="116" width="410" height="58" fill="#17351e" stroke="#58ff58"/><text x="20" y="152" fill="#d5e3d7" font-size="17">argument 1</text><rect y="174" width="410" height="58" fill="#1f2116" stroke="#ffca56"/><text x="20" y="210" fill="#ffca56" font-size="17">receiver</text><rect y="232" width="410" height="58" fill="#312019" stroke="#ff8a65"/><text x="20" y="268" fill="#ff8a65" font-size="17">return address</text></g>
+    <g transform="translate(700 190)"><rect width="410" height="58" fill="#111713" stroke="#416b48" stroke-dasharray="8 6"/><text x="20" y="36" fill="#89a28e" font-size="17">attacker-influenced gap</text><rect y="58" width="410" height="58" fill="#111713" stroke="#416b48" stroke-dasharray="8 6"/><text x="20" y="94" fill="#89a28e" font-size="17">attacker-influenced gap</text><rect y="116" width="410" height="58" fill="#17351e" stroke="#58ff58"/><text x="20" y="152" fill="#d5e3d7" font-size="17">one argument</text><rect y="174" width="410" height="58" fill="#1f2116" stroke="#ffca56"/><text x="20" y="210" fill="#ffca56" font-size="17">receiver</text><rect y="232" width="410" height="58" fill="#ff8a65"/><text x="20" y="268" fill="#0b0f0c" font-size="17" font-weight="700">pop rsp; ret  ->  ROP carrier</text></g>
+  </g>
+  <path d="M522 335H674" stroke="#ff8a65" stroke-width="4"/><path d="m660 323 16 12-16 12" fill="none" stroke="#ff8a65" stroke-width="4"/>
+  <text x="598" y="315" text-anchor="middle" fill="#ff8a65" font-family="Consolas,monospace" font-size="16">cleanup mismatch</text>
+  <text x="600" y="531" text-anchor="middle" fill="#b9c8bc" font-family="Consolas,monospace" font-size="18">caged JavaScript data becomes the native stack. that is the sandbox escape.</text>
+</svg>

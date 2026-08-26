@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">The exploit primitive ladder</title>
+  <desc id="desc">Seven stages upgrade an out-of-bounds read into a real v8CTF flag.</desc>
+  <rect width="1200" height="690" rx="20" fill="#0b0f0c"/>
+  <text x="70" y="70" fill="#f4f7f4" font-family="Arial,sans-serif" font-size="34" font-weight="700">no magic primitive. just upgrades.</text>
+  <text x="70" y="106" fill="#89a28e" font-family="Consolas,monospace" font-size="18">each rung had to produce evidence before the next one counted</text>
+  <g font-family="Consolas,monospace" font-size="18">
+    <g transform="translate(90 535)"><rect width="190" height="70" rx="10" fill="#142119" stroke="#58ff58"/><text x="18" y="29" fill="#58ff58">01 / OOB read</text><text x="18" y="53" fill="#b9c8bc" font-size="15">CVE-2026-15903</text></g>
+    <g transform="translate(225 455)"><rect width="210" height="70" rx="10" fill="#142119" stroke="#58ff58"/><text x="18" y="29" fill="#58ff58">02 / stale object</text><text x="18" y="53" fill="#b9c8bc" font-size="15">CVE-2026-15776</text></g>
+    <g transform="translate(380 375)"><rect width="210" height="70" rx="10" fill="#142119" stroke="#58ff58"/><text x="18" y="29" fill="#58ff58">03 / fake array</text><text x="18" y="53" fill="#b9c8bc" font-size="15">cage read/write</text></g>
+    <g transform="translate(535 295)"><rect width="210" height="70" rx="10" fill="#1f2116" stroke="#ffca56"/><text x="18" y="29" fill="#ffca56">04 / native leak</text><text x="18" y="53" fill="#b9c8bc" font-size="15">ExternalString</text></g>
+    <g transform="translate(690 215)"><rect width="210" height="70" rx="10" fill="#1f2116" stroke="#ffca56"/><text x="18" y="29" fill="#ffca56">05 / stack pivot</text><text x="18" y="53" fill="#b9c8bc" font-size="15">JSPI + JDT</text></g>
+    <g transform="translate(845 135)"><rect width="170" height="70" rx="10" fill="#1f2116" stroke="#ffca56"/><text x="18" y="29" fill="#ffca56">06 / ORW</text><text x="18" y="53" fill="#b9c8bc" font-size="15">native ROP</text></g>
+    <g transform="translate(970 55)"><rect width="160" height="70" rx="10" fill="#58ff58"/><text x="80" y="43" text-anchor="middle" fill="#0b0f0c" font-weight="700">07 / FLAG</text></g>
+  </g>
+  <path d="M110 630 1080 144" fill="none" stroke="#285d32" stroke-width="3" stroke-dasharray="8 10"/>
+</svg>

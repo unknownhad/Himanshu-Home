@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">I had free time, so I tried to pwn V8</title>
+  <desc id="desc">A terminal-style map from JavaScript through the V8 sandbox to the v8CTF flag.</desc>
+  <rect width="1200" height="630" fill="#0b0f0c"/>
+  <path d="M0 92H1200M0 538H1200" stroke="#17351e" stroke-width="2"/>
+  <g fill="#122318" stroke="#285d32">
+    <rect x="72" y="54" width="1056" height="522" rx="18"/>
+    <rect x="72" y="54" width="1056" height="54" rx="18" fill="#162d1d"/>
+  </g>
+  <circle cx="108" cy="81" r="8" fill="#ff685f"/><circle cx="134" cy="81" r="8" fill="#ffca56"/><circle cx="160" cy="81" r="8" fill="#63e87a"/>
+  <text x="190" y="88" fill="#8ca892" font-family="Consolas,monospace" font-size="20">chrome-150 / exploit.log</text>
+  <text x="112" y="172" fill="#58ff58" font-family="Consolas,monospace" font-size="25">himanshu@v8ctf:~$ ./learn-v8-the-hard-way</text>
+  <text x="112" y="255" fill="#f4f7f4" font-family="Arial,sans-serif" font-size="58" font-weight="700">I HAD FREE TIME,</text>
+  <text x="112" y="322" fill="#f4f7f4" font-family="Arial,sans-serif" font-size="58" font-weight="700">SO I TRIED TO PWN <tspan fill="#58ff58">V8</tspan></text>
+  <g font-family="Consolas,monospace" font-size="20">
+    <rect x="112" y="382" width="184" height="46" rx="7" fill="#0b0f0c" stroke="#58ff58"/><text x="138" y="411" fill="#58ff58">JavaScript</text>
+    <path d="M306 405H365" stroke="#58ff58" stroke-width="3"/><path d="m355 396 12 9-12 9" fill="none" stroke="#58ff58" stroke-width="3"/>
+    <rect x="378" y="382" width="207" height="46" rx="7" fill="#0b0f0c" stroke="#58ff58"/><text x="404" y="411" fill="#58ff58">cage read/write</text>
+    <path d="M595 405H654" stroke="#ffca56" stroke-width="3"/><path d="m644 396 12 9-12 9" fill="none" stroke="#ffca56" stroke-width="3"/>
+    <rect x="667" y="382" width="184" height="46" rx="7" fill="#0b0f0c" stroke="#ffca56"/><text x="694" y="411" fill="#ffca56">native ROP</text>
+    <path d="M861 405H920" stroke="#ffca56" stroke-width="3"/><path d="m910 396 12 9-12 9" fill="none" stroke="#ffca56" stroke-width="3"/>
+    <rect x="933" y="382" width="132" height="46" rx="7" fill="#58ff58"/><text x="966" y="411" fill="#0b0f0c" font-weight="700">FLAG</text>
+  </g>
+  <text x="112" y="500" fill="#b9c8bc" font-family="Consolas,monospace" font-size="22">3 public bugs  |  1 real Google flag  |  $0 bounty</text>
+</svg>

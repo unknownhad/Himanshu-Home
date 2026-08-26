@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Security boundaries in the v8CTF target</title>
+  <desc id="desc">Nested layers show JavaScript, the V8 cage, native renderer, disabled Chrome sandbox, and remaining outer jail.</desc>
+  <rect width="1200" height="650" rx="20" fill="#0b0f0c"/>
+  <text x="70" y="68" fill="#f4f7f4" font-family="Arial,sans-serif" font-size="34" font-weight="700">--no-sandbox did not mean no boundaries</text>
+  <text x="70" y="104" fill="#89a28e" font-family="Consolas,monospace" font-size="18">the V8 sandbox still had to be escaped. the outer jail stayed.</text>
+  <g font-family="Consolas,monospace">
+    <rect x="85" y="142" width="1030" height="442" rx="20" fill="#101813" stroke="#416b48" stroke-width="2"/><text x="110" y="178" fill="#89a28e" font-size="20">outer kCTF / nsjail</text>
+    <rect x="145" y="202" width="910" height="322" rx="18" fill="#171713" stroke="#8a7b39" stroke-width="2" stroke-dasharray="12 8"/><text x="170" y="239" fill="#ffca56" font-size="20">Chrome process sandbox: disabled for the challenge</text>
+    <rect x="215" y="267" width="770" height="198" rx="16" fill="#142119" stroke="#ffca56" stroke-width="2"/><text x="240" y="305" fill="#ffca56" font-size="20">native renderer process</text>
+    <rect x="315" y="327" width="570" height="86" rx="12" fill="#17351e" stroke="#58ff58" stroke-width="2"/><text x="600" y="360" text-anchor="middle" fill="#58ff58" font-size="20">V8 pointer-compression cage</text><text x="600" y="391" text-anchor="middle" fill="#d5e3d7" font-size="18">attacker-controlled JavaScript starts here</text>
+  </g>
+  <path d="M600 418V448" stroke="#ffca56" stroke-width="4"/><path d="m588 438 12 14 12-14" fill="none" stroke="#ffca56" stroke-width="4"/>
+  <rect x="704" y="422" width="242" height="34" rx="17" fill="#ffca56"/><text x="825" y="445" text-anchor="middle" fill="#0b0f0c" font-family="Consolas,monospace" font-size="16" font-weight="700">V8 sandbox escape</text>
+</svg>
