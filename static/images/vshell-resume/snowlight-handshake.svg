@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="560" viewBox="0 0 1400 560">
+  <rect width="1400" height="560" fill="#07111f"/>
+  <text x="70" y="78" fill="#f6fbff" font-family="Inter,Segoe UI,sans-serif" font-size="36" font-weight="700">The 40-byte SNOWLIGHT check-in</text>
+  <text x="70" y="115" fill="#91a8b8" font-family="Inter,Segoe UI,sans-serif" font-size="19">Captured client-to-server payload before the 4.65 MB VShell transfer</text>
+  <g font-family="JetBrains Mono,Consolas,monospace">
+    <rect x="70" y="180" width="225" height="112" rx="12" fill="#143a46" stroke="#38e8b0"/>
+    <text x="95" y="220" fill="#38e8b0" font-size="17">BYTES 0..5</text>
+    <text x="95" y="258" fill="#fff" font-size="26">w32___</text>
+    <rect x="310" y="180" width="180" height="112" rx="12" fill="#20394d" stroke="#63aef2"/>
+    <text x="335" y="220" fill="#63aef2" font-size="17">BYTES 6..7</text>
+    <text x="335" y="258" fill="#fff" font-size="26">c6 7c</text>
+    <rect x="505" y="180" width="475" height="112" rx="12" fill="#3b2d48" stroke="#c28df2"/>
+    <text x="530" y="220" fill="#d9afff" font-size="17">BYTES 8..23</text>
+    <text x="530" y="258" fill="#fff" font-size="25">38.207.178.192\0</text>
+    <rect x="995" y="180" width="335" height="112" rx="12" fill="#3f2930" stroke="#ff6d78"/>
+    <text x="1020" y="220" fill="#ff9ca4" font-size="17">BYTES 24..39</text>
+    <text x="1020" y="258" fill="#fff" font-size="24">00 x 16</text>
+  </g>
+  <g font-family="Inter,Segoe UI,sans-serif" font-size="17">
+    <text x="95" y="330" fill="#91a8b8">architecture tag</text>
+    <text x="335" y="330" fill="#91a8b8">port 50812</text>
+    <text x="530" y="330" fill="#91a8b8">server address copied into the beacon</text>
+    <text x="1020" y="330" fill="#91a8b8">unused fields</text>
+  </g>
+  <rect x="70" y="390" width="1260" height="105" rx="14" fill="#0d202b" stroke="#2c5363"/>
+  <text x="100" y="428" fill="#91a8b8" font-family="Inter,Segoe UI,sans-serif" font-size="17">Full payload (hex)</text>
+  <text x="100" y="466" fill="#f6fbff" font-family="JetBrains Mono,Consolas,monospace" font-size="20">77 33 32 20 20 20 c6 7c 33 38 2e 32 30 37 2e 31 37 38 2e 31 39 32 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</text>
+</svg>

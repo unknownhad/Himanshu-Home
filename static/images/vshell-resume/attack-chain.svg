@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#0f2330"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-opacity=".35"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#38e8b0"/>
+    </marker>
+  </defs>
+  <rect width="1400" height="720" fill="url(#bg)"/>
+  <text x="70" y="78" fill="#f6fbff" font-family="Inter,Segoe UI,sans-serif" font-size="38" font-weight="700">The resume-to-RAT chain</text>
+  <text x="70" y="116" fill="#91a8b8" font-family="Inter,Segoe UI,sans-serif" font-size="20">Confirmed delivery behavior plus documented VShell capabilities</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="180" width="280" height="360" rx="20" fill="#102b38" stroke="#2c5363"/>
+    <rect x="390" y="180" width="280" height="360" rx="20" fill="#102b38" stroke="#2c5363"/>
+    <rect x="710" y="180" width="280" height="360" rx="20" fill="#102b38" stroke="#2c5363"/>
+    <rect x="1030" y="180" width="300" height="360" rx="20" fill="#102b38" stroke="#ff6d78" stroke-width="2"/>
+  </g>
+
+  <g font-family="Inter,Segoe UI,sans-serif">
+    <circle cx="112" cy="225" r="23" fill="#38e8b0"/><text x="105" y="233" font-size="22" font-weight="700" fill="#07111f">1</text>
+    <text x="145" y="234" font-size="26" font-weight="700" fill="#f6fbff">Lure</text>
+    <text x="100" y="290" font-size="19" fill="#c8d7df">Mainland-oriented academic</text>
+    <text x="100" y="320" font-size="19" fill="#c8d7df">resume executable</text>
+    <text x="100" y="375" font-size="17" fill="#91a8b8">Pretends to be a BIT</text>
+    <text x="100" y="401" font-size="17" fill="#91a8b8">student applying to an</text>
+    <text x="100" y="427" font-size="17" fill="#91a8b8">electrical/AI research lab</text>
+    <rect x="100" y="470" width="218" height="38" rx="19" fill="#173f4b"/><text x="122" y="495" font-size="16" fill="#38e8b0">USER EXECUTION</text>
+
+    <circle cx="432" cy="225" r="23" fill="#38e8b0"/><text x="425" y="233" font-size="22" font-weight="700" fill="#07111f">2</text>
+    <text x="465" y="234" font-size="26" font-weight="700" fill="#f6fbff">Go loader</text>
+    <text x="420" y="290" font-size="19" fill="#c8d7df">ThreatBook checks</text>
+    <text x="420" y="320" font-size="19" fill="#c8d7df">CPU-core check</text>
+    <text x="420" y="350" font-size="19" fill="#c8d7df">Beep-based sleep</text>
+    <text x="420" y="405" font-size="17" fill="#91a8b8">Decrypts configuration,</text>
+    <text x="420" y="431" font-size="17" fill="#91a8b8">downloads a real DOCX,</text>
+    <text x="420" y="457" font-size="17" fill="#91a8b8">then opens it in Word</text>
+    <rect x="420" y="490" width="218" height="38" rx="19" fill="#173f4b"/><text x="443" y="515" font-size="16" fill="#38e8b0">PORT 50813 / HTTP</text>
+
+    <circle cx="752" cy="225" r="23" fill="#38e8b0"/><text x="745" y="233" font-size="22" font-weight="700" fill="#07111f">3</text>
+    <text x="785" y="234" font-size="26" font-weight="700" fill="#f6fbff">SNOWLIGHT</text>
+    <text x="740" y="290" font-size="19" fill="#c8d7df">Win32 TCP stager</text>
+    <text x="740" y="320" font-size="19" fill="#c8d7df">40-byte w32 beacon</text>
+    <text x="740" y="350" font-size="19" fill="#c8d7df">XOR key 0x99</text>
+    <text x="740" y="405" font-size="17" fill="#91a8b8">Receives 4.65 MB,</text>
+    <text x="740" y="431" font-size="17" fill="#91a8b8">decodes it in memory,</text>
+    <text x="740" y="457" font-size="17" fill="#91a8b8">and jumps into stage 3</text>
+    <rect x="740" y="490" width="218" height="38" rx="19" fill="#173f4b"/><text x="761" y="515" font-size="16" fill="#38e8b0">PORT 50812 / TCP</text>
+
+    <circle cx="1072" cy="225" r="23" fill="#ff6d78"/><text x="1065" y="233" font-size="22" font-weight="700" fill="#07111f">4</text>
+    <text x="1105" y="234" font-size="26" font-weight="700" fill="#f6fbff">VShell RAT</text>
+    <text x="1060" y="290" font-size="19" fill="#f6c7cb">Remote shell</text>
+    <text x="1060" y="320" font-size="19" fill="#f6c7cb">File upload/download</text>
+    <text x="1060" y="350" font-size="19" fill="#f6c7cb">Screen capture/control</text>
+    <text x="1060" y="380" font-size="19" fill="#f6c7cb">Proxy and tunneling</text>
+    <text x="1060" y="435" font-size="17" fill="#91a8b8">RAT registration observed;</text>
+    <text x="1060" y="461" font-size="17" fill="#91a8b8">no human-issued command</text>
+    <text x="1060" y="487" font-size="17" fill="#91a8b8">appeared in the capture</text>
+    <rect x="1060" y="510" width="238" height="38" rx="19" fill="#4c2630"/><text x="1083" y="535" font-size="16" fill="#ff9ca4">REMOTE ACCESS</text>
+  </g>
+
+  <path d="M350 355 H382" stroke="#38e8b0" stroke-width="5" marker-end="url(#arrow)"/>
+  <path d="M670 355 H702" stroke="#38e8b0" stroke-width="5" marker-end="url(#arrow)"/>
+  <path d="M990 355 H1022" stroke="#38e8b0" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <rect x="70" y="590" width="1260" height="76" rx="16" fill="#081721" stroke="#2c5363"/>
+  <text x="100" y="622" fill="#91a8b8" font-family="Inter,Segoe UI,sans-serif" font-size="17">Operational objective</text>
+  <text x="100" y="650" fill="#f6fbff" font-family="Inter,Segoe UI,sans-serif" font-size="23" font-weight="600">Turn one believable academic document into quiet, full-featured access to a professor or research-lab workstation.</text>
+</svg>

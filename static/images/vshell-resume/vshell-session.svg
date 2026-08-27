@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="660" viewBox="0 0 1400 660">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#0f2330"/>
+    </linearGradient>
+    <marker id="right" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#38e8b0"/></marker>
+    <marker id="left" markerWidth="12" markerHeight="12" refX="1" refY="4" orient="auto"><path d="M10,0 L0,4 L10,8 Z" fill="#7db8ff"/></marker>
+  </defs>
+  <rect width="1400" height="660" fill="url(#bg)"/>
+  <g font-family="Inter,Segoe UI,sans-serif">
+    <text x="70" y="72" fill="#f6fbff" font-size="36" font-weight="700">What happened after VShell loaded</text>
+    <text x="70" y="108" fill="#91a8b8" font-size="19">198 valid AES-GCM frames across three new TCP sessions; payload contents remain encrypted</text>
+
+    <rect x="70" y="150" width="250" height="390" rx="20" fill="#102b38" stroke="#2c5363"/>
+    <text x="195" y="205" text-anchor="middle" fill="#f6fbff" font-size="25" font-weight="700">Sandbox host</text>
+    <text x="195" y="245" text-anchor="middle" fill="#91a8b8" font-size="18">192.168.100[.]4</text>
+    <rect x="105" y="300" width="180" height="66" rx="14" fill="#173f4b"/>
+    <text x="195" y="329" text-anchor="middle" fill="#38e8b0" font-size="17">CLIENT NONCE</text>
+    <text x="195" y="352" text-anchor="middle" fill="#c8d7df" font-size="16">high bit clear: 101/101</text>
+    <rect x="105" y="395" width="180" height="86" rx="14" fill="#172c46"/>
+    <text x="195" y="426" text-anchor="middle" fill="#7db8ff" font-size="17">OBSERVED</text>
+    <text x="195" y="451" text-anchor="middle" fill="#c8d7df" font-size="16">registration + health</text>
+
+    <rect x="1080" y="150" width="250" height="390" rx="20" fill="#102b38" stroke="#ff6d78" stroke-width="2"/>
+    <text x="1205" y="205" text-anchor="middle" fill="#f6fbff" font-size="25" font-weight="700">VShell listener</text>
+    <text x="1205" y="245" text-anchor="middle" fill="#91a8b8" font-size="18">38.207.178[.]192:50812</text>
+    <rect x="1115" y="300" width="180" height="66" rx="14" fill="#172c46"/>
+    <text x="1205" y="329" text-anchor="middle" fill="#7db8ff" font-size="17">SERVER NONCE</text>
+    <text x="1205" y="352" text-anchor="middle" fill="#c8d7df" font-size="16">high bit set: 97/97</text>
+    <rect x="1115" y="395" width="180" height="86" rx="14" fill="#4c2630"/>
+    <text x="1205" y="426" text-anchor="middle" fill="#ff9ca4" font-size="17">NOT OBSERVED</text>
+    <text x="1205" y="451" text-anchor="middle" fill="#f6c7cb" font-size="16">shell/file/operator action</text>
+
+    <text x="700" y="166" text-anchor="middle" fill="#91a8b8" font-size="17">TCP 49805</text>
+    <path d="M340 195 H1060" stroke="#38e8b0" stroke-width="4" marker-end="url(#right)"/>
+    <text x="700" y="190" text-anchor="middle" fill="#38e8b0" font-size="17">version x2 | MD5 | channel | 405-byte registration</text>
+    <path d="M1060 225 H340" stroke="#7db8ff" stroke-width="4" marker-end="url(#left)"/>
+    <text x="700" y="249" text-anchor="middle" fill="#7db8ff" font-size="17">MD5 | channel | acknowledgements | token</text>
+
+    <text x="700" y="302" text-anchor="middle" fill="#91a8b8" font-size="17">TCP 49806</text>
+    <path d="M340 330 H1060" stroke="#38e8b0" stroke-width="4" marker-end="url(#right)"/>
+    <text x="700" y="325" text-anchor="middle" fill="#38e8b0" font-size="17">version x2 | MD5 | channel</text>
+    <path d="M1060 360 H340" stroke="#7db8ff" stroke-width="4" marker-end="url(#left)"/>
+    <text x="700" y="384" text-anchor="middle" fill="#7db8ff" font-size="17">MD5 | channel</text>
+
+    <text x="700" y="438" text-anchor="middle" fill="#91a8b8" font-size="17">TCP 49807, about 142 seconds</text>
+    <path d="M340 466 H1060" stroke="#38e8b0" stroke-width="4" marker-end="url(#right)"/>
+    <path d="M1060 498 H340" stroke="#7db8ff" stroke-width="4" marker-end="url(#left)"/>
+    <text x="700" y="463" text-anchor="middle" fill="#38e8b0" font-size="17">handshake, then repeated 7-byte health messages</text>
+    <text x="700" y="523" text-anchor="middle" fill="#7db8ff" font-size="17">mirrored 27-30-byte health data</text>
+
+    <rect x="70" y="575" width="1260" height="52" rx="14" fill="#081721" stroke="#2c5363"/>
+    <text x="700" y="608" text-anchor="middle" fill="#f6fbff" font-size="20" font-weight="600">Successful RAT initialization is evidence of access. It is not evidence that a person used that access.</text>
+  </g>
+</svg>
