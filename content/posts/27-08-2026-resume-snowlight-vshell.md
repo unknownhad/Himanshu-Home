@@ -13,7 +13,7 @@ description: "A fake resume claimed an applicant from one of China's Seven Sons 
 
 ## TLDR
 
-I found a Chinese-language "resume" that is actually a Windows executable. It claims to come from a student at one of China's **Seven Sons of National Defence**, opens a real Word document, which is nice of it, and quietly delivers **SNOWLIGHT and the VShell remote-access trojan**, which is less nice.
+I found a Chinese-language "resume" that is actually a Windows executable. It claims to come from a student at one of China's **Seven Sons of National Defence**, opens a real Word document, which is nice of it and quietly delivers **SNOWLIGHT and the VShell remote-access trojan**, which is less nice.
 
 The chain is:
 
@@ -48,7 +48,7 @@ ANY.RUN gave it a 100/100 malicious score, labeled the process `vshell` and show
 
 Public task: [ANY.RUN analysis 8d27f4bf-ed8c-461d-96e6-86968464dd86](https://app.any.run/tasks/8d27f4bf-ed8c-461d-96e6-86968464dd86/)
 
-The obvious answer was "it is a RAT." The useful question was **what does each stage do, and what does the combination tell us about the operator's objective?**
+The obvious answer was "it is a RAT." The useful question was **what does each stage do and what does the combination tell us about the operator's objective?**
 
 So I took it apart.
 
@@ -127,7 +127,7 @@ The sample ran on 21 August, eight days after the last edit. The WPS user ID and
 
 ## who was this written for?
 
-There are four different questions here, and combining them produces bad attribution very efficiently:
+There are four different questions here and combining them produces bad attribution very efficiently:
 
 1. What language and theme does the lure use?
 2. Who does the document claim the applicant is?
@@ -154,7 +154,7 @@ None of this proves the server operator was in mainland China. It says the lure 
 
 ## stage 1: a Go loader with trust issues
 
-The first executable is a 5,073,728-byte, 32-bit Go binary built with Go 1.22.0 for Windows `386`, with `CGO_ENABLED=0`, a zeroed linker timestamp and a nominal Kingsoft signature that fails validation with `HashMismatch`. Its internal project name is `pdfrehuai`, and unlike the final payload it left useful symbols and source paths behind:
+The first executable is a 5,073,728-byte, 32-bit Go binary built with Go 1.22.0 for Windows `386`, with `CGO_ENABLED=0`, a zeroed linker timestamp and a nominal Kingsoft signature that fails validation with `HashMismatch`. Its internal project name is `pdfrehuai` and unlike the final payload it left useful symbols and source paths behind:
 
 ```text
 pdfrehuai/sandbox.AntiWeibu
@@ -185,7 +185,7 @@ The loader reads Go's cached logical-processor count and exits when the machine 
 
 ### BeepSleep
 
-Instead of trusting `Sleep`, the loader dynamically resolves `kernel32!Beep`, calls it at 30,000 Hz for ten seconds, records the time before and after, and checks that ten whole seconds elapsed. If the sandbox accelerates time, it exits. On normal desktops that frequency is inaudible; the function name is funnier than the user experience.
+Instead of trusting `Sleep`, the loader dynamically resolves `kernel32!Beep`, calls it at 30,000 Hz for ten seconds, records the time before and after and checks that ten whole seconds elapsed. If the sandbox accelerates time, it exits. On normal desktops that frequency is inaudible; the function name is funnier than the user experience.
 
 ### encrypted configuration
 
@@ -265,7 +265,7 @@ The exact client check-in was captured in the PCAP:
 
 That 40-byte packet is useful for detection because it is much more specific than "a Windows computer used TCP."
 
-SNOWLIGHT does not authenticate the server, verify a signature or hash, validate an `MZ` header, or receive an explicit payload size. It keeps copying `recv` results into the fixed 30,000,000-byte region and appears not to enforce that boundary. The panel stager is small because it delegates both trust and memory safety to whoever answered the socket. What could go wrong has been scheduled for the next stage.
+SNOWLIGHT does not authenticate the server, verify a signature or hash, validate an `MZ` header or receive an explicit payload size. It keeps copying `recv` results into the fixed 30,000,000-byte region and appears not to enforce that boundary. The panel stager is small because it delegates both trust and memory safety to whoever answered the socket. What could go wrong has been scheduled for the next stage.
 
 [![ANY.RUN showing the 40-byte check-in and 4 MB response on port 50812](https://blog.himanshuanand.com/images/vshell-resume/anyrun-c2-row.png)](https://blog.himanshuanand.com/images/vshell-resume/anyrun-c2-row.png)
 
@@ -329,7 +329,7 @@ The sizes, ordering, direction-marked nonces and cadence nevertheless prove that
 
 ## okay, but what does the malware actually do?
 
-There are two answers: what this sample **demonstrably does**, and what the delivered VShell platform **allows the operator to do**.
+There are two answers: what this sample **demonstrably does** and what the delivered VShell platform **allows the operator to do**.
 
 ### confirmed directly in this sample
 
@@ -391,7 +391,7 @@ One-line version: **turn a believable academic document into quiet, full-feature
 
 ## attribution: please keep your red string on the corkboard
 
-SNOWLIGHT has history. Mandiant named it while tracking UNC5174, and [Sysdig linked SNOWLIGHT-delivered VShell to UNC5174](https://www.sysdig.com/blog/unc5174-chinese-threat-actor-vshell), a China-nexus contractor associated with espionage and access brokering.
+SNOWLIGHT has history. Mandiant named it while tracking UNC5174 and [Sysdig linked SNOWLIGHT-delivered VShell to UNC5174](https://www.sysdig.com/blog/unc5174-chinese-threat-actor-vshell), a China-nexus contractor associated with espionage and access brokering.
 
 If this analysis stopped in 2025, "possible UNC5174" would be tempting.
 
@@ -435,7 +435,7 @@ Commodity      Exact panel-generated w32/TCP      Does not identify one operator
 VShell user    stager; cracked builds available   no unsupported actor-specific assumption
 ```
 
-The last row requires the fewest leaps. Cisco Talos calls SNOWLIGHT a generic VShell stager in its [UAT-8302 research](https://blog.talosintelligence.com/uat-8302/), and Google describes VShell as publicly available and used by actors with varying motivations in its [UNC6586 reporting](https://cloud.google.com/blog/topics/threat-intelligence/threat-actors-exploit-react2shell-cve-2025-55182). Neither source links this campaign to those groups.
+The last row requires the fewest leaps. Cisco Talos calls SNOWLIGHT a generic VShell stager in its [UAT-8302 research](https://blog.talosintelligence.com/uat-8302/) and Google describes VShell as publicly available and used by actors with varying motivations in its [UNC6586 reporting](https://cloud.google.com/blog/topics/threat-intelligence/threat-actors-exploit-react2shell-cve-2025-55182). Neither source links this campaign to those groups.
 
 What is missing for actor-level attribution:
 
@@ -570,7 +570,7 @@ The interesting part is how cleanly the **behavior and lure answer different hal
 
 The code says the operator wanted an interactive foothold. It spends effort on sandbox detection, time checks, encrypted staging and fileless execution, then installs a framework built for shells, files, screens and tunnels.
 
-The document says whose foothold might be useful: somebody reading graduate applications about AI, electrical systems, power grids and renewable energy, presented under the name of a university with real defence significance. Probably a professor or research lab. Not necessarily Beijing Institute of Technology, and not necessarily a government target, but clearly more specific than "any Windows user with a mouse."
+The document says whose foothold might be useful: somebody reading graduate applications about AI, electrical systems, power grids and renewable energy, presented under the name of a university with real defence significance. Probably a professor or research lab. Not necessarily Beijing Institute of Technology and not necessarily a government target, but clearly more specific than "any Windows user with a mouse."
 
 That is how I would present the objective: not "VShell equals espionage," and not "China lure equals APT." Instead:
 
