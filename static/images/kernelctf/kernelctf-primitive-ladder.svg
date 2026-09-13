@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Kernel exploit primitive ladder</title>
+  <desc id="desc">Eight evidence-gated stages move from a missed TLB shootdown to a checked kernelCTF proof.</desc>
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#080d12"/><stop offset="1" stop-color="#0c1518"/></linearGradient></defs>
+  <rect width="1200" height="720" rx="24" fill="url(#bg)"/>
+  <text x="62" y="67" fill="#f0f6f5" font-family="Arial,sans-serif" font-size="34" font-weight="700">the bug was rung one, not the finish line</text>
+  <text x="62" y="103" fill="#7f98a4" font-family="Consolas,monospace" font-size="18">every upgrade had a runtime gate and a failure state</text>
+  <path d="M92 635L1100 150" fill="none" stroke="#214e3b" stroke-width="4" stroke-dasharray="9 10"/>
+  <g font-family="Consolas,monospace">
+    <g transform="translate(62 580)"><rect width="220" height="82" rx="12" fill="#10211d" stroke="#4ee59b"/><text x="18" y="32" fill="#4ee59b" font-size="18">01 missed flush</text><text x="18" y="59" fill="#afc4be" font-size="15">marker + absent PTE</text></g>
+    <g transform="translate(190 496)"><rect width="220" height="82" rx="12" fill="#10211d" stroke="#4ee59b"/><text x="18" y="32" fill="#4ee59b" font-size="18">02 stale RW+D</text><text x="18" y="59" fill="#afc4be" font-size="15">primed secretmem</text></g>
+    <g transform="translate(318 412)"><rect width="220" height="82" rx="12" fill="#191b12" stroke="#ffc857"/><text x="18" y="32" fill="#ffc857" font-size="18">03 empty unmap</text><text x="18" y="59" fill="#cfc8a8" font-size="15">zero + physical free</text></g>
+    <g transform="translate(446 328)"><rect width="220" height="82" rx="12" fill="#191b12" stroke="#ffc857"/><text x="18" y="32" fill="#ffc857" font-size="18">04 PTE reuse</text><text x="18" y="59" fill="#cfc8a8" font-size="15">conditioned PFN</text></g>
+    <g transform="translate(574 244)"><rect width="220" height="82" rx="12" fill="#161827" stroke="#9d8cff"/><text x="18" y="32" fill="#b4a7ff" font-size="18">05 fingerprint</text><text x="18" y="59" fill="#c6c0e5" font-size="15">owner + commit</text></g>
+    <g transform="translate(702 160)"><rect width="220" height="82" rx="12" fill="#161827" stroke="#9d8cff"/><text x="18" y="32" fill="#b4a7ff" font-size="18">06 canary PTE</text><text x="18" y="59" fill="#c6c0e5" font-size="15">benign alias proof</text></g>
+    <g transform="translate(830 76)"><rect width="190" height="82" rx="12" fill="#211217" stroke="#ff647c"/><text x="18" y="32" fill="#ff788e" font-size="18">07 core_pattern</text><text x="18" y="59" fill="#ddb9c0" font-size="15">public prior art</text></g>
+    <g transform="translate(1030 24)"><rect width="130" height="70" rx="12" fill="#4ee59b"/><text x="65" y="42" text-anchor="middle" fill="#07110d" font-size="18" font-weight="700">08 PROOF</text></g>
+  </g>
+</svg>

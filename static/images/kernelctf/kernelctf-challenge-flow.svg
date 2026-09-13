@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Authorized kernelCTF challenge flow</title>
+  <desc id="desc">An unprivileged exploit runs in a network-disabled guest, crosses only the guest kernel boundary, reads the challenge proof, and becomes a reviewed submission.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#080d12"/><stop offset="1" stop-color="#111b22"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="1200" height="620" rx="24" fill="url(#bg)"/>
+  <text x="62" y="72" fill="#f0f6f5" font-family="Arial,sans-serif" font-size="34" font-weight="700">the challenge boundary, drawn honestly</text>
+  <text x="62" y="108" fill="#7f9aa8" font-family="Consolas,monospace" font-size="18">guest privilege escalation yes / host escape no / signed proof stays private</text>
+  <g font-family="Consolas,monospace">
+    <rect x="62" y="168" width="1076" height="330" rx="20" fill="#0b1319" stroke="#294452" stroke-width="2"/>
+    <text x="88" y="204" fill="#7f9aa8" font-size="17">ISOLATED QEMU GUEST / 2 vCPU / -nic none</text>
+    <g transform="translate(105 270)"><rect width="220" height="116" rx="14" fill="#10211d" stroke="#4ee59b" stroke-width="2"/><text x="110" y="42" text-anchor="middle" fill="#4ee59b" font-size="20">UID 1000</text><text x="110" y="75" text-anchor="middle" fill="#bdd2cc" font-size="16">static exploit</text></g>
+    <path d="M335 328H455" stroke="#4ee59b" stroke-width="4" marker-end="url(#a)"/>
+    <g transform="translate(465 238)"><rect width="270" height="180" rx="14" fill="#1c1b12" stroke="#ffc857" stroke-width="2"/><text x="135" y="43" text-anchor="middle" fill="#ffc857" font-size="20">guest kernel</text><text x="135" y="78" text-anchor="middle" fill="#d6cda9" font-size="16">CVE-2025-37964</text><text x="135" y="108" text-anchor="middle" fill="#d6cda9" font-size="16">stale TLB -&gt; PTE</text><text x="135" y="145" text-anchor="middle" fill="#ffc857" font-size="16">intended boundary</text></g>
+    <path d="M745 328H855" stroke="#4ee59b" stroke-width="4" marker-end="url(#a)"/>
+    <g transform="translate(865 270)"><rect width="220" height="116" rx="14" fill="#10211d" stroke="#4ee59b" stroke-width="2"/><text x="110" y="42" text-anchor="middle" fill="#4ee59b" font-size="20">proof</text><text x="110" y="75" text-anchor="middle" fill="#bdd2cc" font-size="16">flag redacted</text></g>
+  </g>
+  <path d="M600 498V552H950" fill="none" stroke="#5f7e8e" stroke-width="2" stroke-dasharray="7 8"/>
+  <text x="967" y="558" fill="#8da4af" font-family="Consolas,monospace" font-size="17">exp659 review</text>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#4ee59b"/></marker></defs>
+</svg>

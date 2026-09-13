@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Pair-coded PTE ownership fingerprint</title>
+  <desc id="desc">Selected PTE slots encode start, a nine-bit region identity, completion, a canary source, and an untouched destination while all undeclared slots remain zero.</desc>
+  <rect width="1200" height="680" rx="24" fill="#080d12"/>
+  <text x="62" y="68" fill="#f0f6f5" font-family="Arial,sans-serif" font-size="34" font-weight="700">make the reclaimed page table say who owns it</text>
+  <text x="62" y="104" fill="#7f98a4" font-family="Consolas,monospace" font-size="18">512 slots / positive code + exact-zero negative space / two identical snapshots</text>
+  <g transform="translate(62 170)" font-family="Consolas,monospace">
+    <rect width="1076" height="330" rx="18" fill="#0c151b" stroke="#2c4653" stroke-width="2"/>
+    <g font-size="15" text-anchor="middle">
+      <g transform="translate(30 55)"><rect width="110" height="110" rx="10" fill="#133025" stroke="#4ee59b" stroke-width="2"/><text x="55" y="38" fill="#4ee59b">slot 0</text><text x="55" y="72" fill="#d0e4de">START</text></g>
+      <g transform="translate(165 55)"><rect width="310" height="110" rx="10" fill="#191b12" stroke="#ffc857"/><text x="155" y="34" fill="#ffc857">slots 2..19</text><text x="155" y="65" fill="#d8cfaa">9 identity pairs</text><text x="155" y="90" fill="#d8cfaa">exactly one per pair</text></g>
+      <g transform="translate(500 55)"><rect width="130" height="110" rx="10" fill="#133025" stroke="#4ee59b" stroke-width="2"/><text x="65" y="38" fill="#4ee59b">slot 32</text><text x="65" y="72" fill="#d0e4de">COMMIT</text></g>
+      <g transform="translate(655 55)"><rect width="150" height="110" rx="10" fill="#161827" stroke="#9d8cff"/><text x="75" y="38" fill="#b4a7ff">slot 64</text><text x="75" y="72" fill="#d0cbea">CANARY</text></g>
+      <g transform="translate(830 55)"><rect width="190" height="110" rx="10" fill="#211217" stroke="#ff647c" stroke-width="2"/><text x="95" y="38" fill="#ff788e">slot 511</text><text x="95" y="68" fill="#e0bcc3">NEVER WALKED</text><text x="95" y="92" fill="#e0bcc3">must be zero</text></g>
+    </g>
+    <path d="M85 202H950" stroke="#38505b" stroke-width="12" stroke-linecap="round"/>
+    <path d="M145 202H795" stroke="#4ee59b" stroke-width="12" stroke-linecap="round" stroke-dasharray="9 18"/>
+    <text x="30" y="260" fill="#7f98a4" font-size="17">accept only if:</text>
+    <text x="205" y="260" fill="#c3d0d4" font-size="17">same zero-page PFN</text>
+    <text x="445" y="260" fill="#c3d0d4" font-size="17">exact flags</text>
+    <text x="620" y="260" fill="#c3d0d4" font-size="17">valid region ID</text>
+    <text x="840" y="260" fill="#ff9bad" font-size="17">everything else = 0</text>
+  </g>
+  <text x="62" y="574" fill="#4ee59b" font-family="Consolas,monospace" font-size="19">snapshot A == snapshot B</text>
+  <text x="62" y="611" fill="#8ca2ac" font-family="Consolas,monospace" font-size="17">identity before write / completion before trust / canary before kernel data</text>
+</svg>

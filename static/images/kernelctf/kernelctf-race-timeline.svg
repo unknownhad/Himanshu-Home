@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">CVE-2025-37964 race timeline</title>
+  <desc id="desc">CPU0 switches from a helper address space while CPU1 clears a PTE; CPU1 skips the IPI and CPU0 skips its local flush.</desc>
+  <rect width="1200" height="700" rx="24" fill="#080d12"/>
+  <text x="62" y="68" fill="#f0f6f5" font-family="Arial,sans-serif" font-size="34" font-weight="700">two reasonable decisions. one unreasonable stale translation.</text>
+  <text x="62" y="104" fill="#7c95a1" font-family="Consolas,monospace" font-size="18">time flows downward / the dangerous window is highlighted</text>
+  <g font-family="Consolas,monospace">
+    <text x="230" y="160" text-anchor="middle" fill="#62b4ff" font-size="24">CPU0 / helper -&gt; reader</text>
+    <text x="850" y="160" text-anchor="middle" fill="#ffc857" font-size="24">CPU1 / writer</text>
+    <line x1="230" y1="184" x2="230" y2="630" stroke="#315166" stroke-width="4"/>
+    <line x1="850" y1="184" x2="850" y2="630" stroke="#66542d" stroke-width="4"/>
+    <rect x="105" y="258" width="870" height="210" rx="18" fill="#24141a" stroke="#873344" stroke-width="2" opacity=".88"/>
+    <g fill="#d5e0e3" font-size="18">
+      <circle cx="230" cy="220" r="8" fill="#62b4ff"/><text x="260" y="227">start switch into target mm</text>
+      <circle cx="230" cy="285" r="8" fill="#62b4ff"/><text x="260" y="292">read old TLB generation</text>
+      <circle cx="850" cy="335" r="8" fill="#ffc857"/><text x="570" y="342">clear target PTE</text>
+      <circle cx="850" cy="390" r="8" fill="#ffc857"/><text x="505" y="397">still see helper mm -&gt; skip IPI</text>
+      <circle cx="230" cy="450" r="8" fill="#62b4ff"/><text x="260" y="457">publish state too late</text>
+      <circle cx="230" cy="520" r="8" fill="#ff647c"/><text x="260" y="527">generation looks current -&gt; skip flush</text>
+      <circle cx="230" cy="590" r="12" fill="#4ee59b"/><text x="260" y="597" fill="#4ee59b">load through stale translation</text>
+    </g>
+    <path d="M838 390C650 390 480 450 245 520" fill="none" stroke="#ff647c" stroke-width="3" stroke-dasharray="7 7"/>
+    <text x="795" y="664" fill="#889da7" font-size="16">fixed .97 restores the stable ordering</text>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" role="img" aria-labelledby="title desc">
+  <title id="title">Virtual memory and stale TLB basics</title>
+  <desc id="desc">A virtual address normally reaches a physical page through a PTE, while a CPU-local TLB can retain the old translation after the software PTE is cleared.</desc>
+  <rect width="1200" height="660" rx="24" fill="#080d12"/>
+  <text x="62" y="70" fill="#eff7f4" font-family="Arial,sans-serif" font-size="34" font-weight="700">software erased the address. hardware kept the note.</text>
+  <text x="62" y="106" fill="#7992a0" font-family="Consolas,monospace" font-size="18">one virtual page / one leaf PTE / one physical frame / two disagreeing views</text>
+  <g font-family="Consolas,monospace">
+    <g transform="translate(62 188)"><rect width="220" height="120" rx="14" fill="#10211d" stroke="#4ee59b" stroke-width="2"/><text x="110" y="43" text-anchor="middle" fill="#4ee59b" font-size="21">virtual address</text><text x="110" y="78" text-anchor="middle" fill="#b9cec8" font-size="16">0x7f... + offset</text></g>
+    <g transform="translate(365 188)"><rect width="220" height="120" rx="14" fill="#1b1a11" stroke="#ffc857" stroke-width="2"/><text x="110" y="43" text-anchor="middle" fill="#ffc857" font-size="21">leaf PTE</text><text x="110" y="78" text-anchor="middle" fill="#d3caa6" font-size="16">PFN + RW/U/A/D</text></g>
+    <g transform="translate(668 188)"><rect width="220" height="120" rx="14" fill="#10211d" stroke="#4ee59b" stroke-width="2"/><text x="110" y="43" text-anchor="middle" fill="#4ee59b" font-size="21">physical page</text><text x="110" y="78" text-anchor="middle" fill="#b9cec8" font-size="16">4 KiB frame</text></g>
+    <path d="M282 248H355M585 248H658" stroke="#4ee59b" stroke-width="3"/>
+    <g transform="translate(365 425)"><rect width="220" height="116" rx="14" fill="#211217" stroke="#ff647c" stroke-width="2"/><text x="110" y="42" text-anchor="middle" fill="#ff647c" font-size="21">software PTE</text><text x="110" y="78" text-anchor="middle" fill="#e4b8c0" font-size="17">PRESENT = 0</text></g>
+    <g transform="translate(668 425)"><rect width="280" height="116" rx="14" fill="#101b25" stroke="#62b4ff" stroke-width="2"/><text x="140" y="39" text-anchor="middle" fill="#62b4ff" font-size="21">CPU0 TLB / PCID</text><text x="140" y="75" text-anchor="middle" fill="#b5d1e8" font-size="17">old VA -&gt; PFN survives</text></g>
+    <path d="M475 318V415" stroke="#ff647c" stroke-width="3" stroke-dasharray="8 7"/>
+    <path d="M808 415V318" stroke="#62b4ff" stroke-width="3" stroke-dasharray="8 7"/>
+    <text x="984" y="453" fill="#ff647c" font-size="18">missed</text><text x="984" y="480" fill="#ff647c" font-size="18">shootdown</text>
+    <path d="M948 478H870" stroke="#ff647c" stroke-width="2" stroke-dasharray="5 6"/>
+    <text x="62" y="609" fill="#8aa0aa" font-size="17">normal: clear PTE -&gt; invalidate CPU0 -&gt; next load faults</text>
+    <text x="644" y="609" fill="#ffca67" font-size="17">bug: clear PTE -&gt; no IPI -&gt; stale load works</text>
+  </g>
+</svg>

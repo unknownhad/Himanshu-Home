@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Kernel debugger and tracefs map</title>
+  <desc id="desc">GDB uses the exact vmlinux and QEMU stub to inspect CPU control flow, while tracefs records page allocation and free events; both perturb race timing.</desc>
+  <defs><linearGradient id="bg" x2="1"><stop stop-color="#080d12"/><stop offset="1" stop-color="#10171f"/></linearGradient></defs>
+  <rect width="1200" height="680" rx="24" fill="url(#bg)"/>
+  <text x="62" y="68" fill="#f0f6f5" font-family="Arial,sans-serif" font-size="34" font-weight="700">two tools, two questions, one disturbed race</text>
+  <text x="62" y="104" fill="#7f98a4" font-family="Consolas,monospace" font-size="18">GDB: where are the CPUs? / tracefs: what happened to the pages?</text>
+  <g font-family="Consolas,monospace">
+    <g transform="translate(62 165)"><rect width="440" height="360" rx="18" fill="#0e1923" stroke="#62b4ff" stroke-width="2"/><text x="30" y="48" fill="#62b4ff" font-size="25">GDB + exact vmlinux</text><text x="30" y="89" fill="#b9d2e5" font-size="17">target remote :1234</text><text x="30" y="125" fill="#b9d2e5" font-size="17">switch_mm_irqs_off</text><text x="30" y="161" fill="#b9d2e5" font-size="17">finish_task_switch</text><text x="30" y="197" fill="#b9d2e5" font-size="17">RIP / CR3 / backtrace</text><line x1="30" y1="230" x2="410" y2="230" stroke="#294555"/><text x="30" y="270" fill="#7f98a4" font-size="16">stops vCPUs</text><text x="30" y="304" fill="#7f98a4" font-size="16">breakpoints change scheduling</text></g>
+    <g transform="translate(698 165)"><rect width="440" height="360" rx="18" fill="#151b12" stroke="#ffc857" stroke-width="2"/><text x="30" y="48" fill="#ffc857" font-size="25">tracefs / kmem events</text><text x="30" y="89" fill="#d8cfab" font-size="17">mm_page_alloc</text><text x="30" y="125" fill="#d8cfab" font-size="17">mm_page_free</text><text x="30" y="161" fill="#d8cfab" font-size="17">mm_page_free_batched</text><text x="30" y="197" fill="#d8cfab" font-size="17">mm_page_pcpu_drain</text><line x1="30" y1="230" x2="410" y2="230" stroke="#514729"/><text x="30" y="270" fill="#9f987f" font-size="16">records while guest runs</text><text x="30" y="304" fill="#9f987f" font-size="16">event overhead changes timing</text></g>
+    <path d="M512 345H688" stroke="#4ee59b" stroke-width="3" stroke-dasharray="8 8"/>
+    <circle cx="600" cy="345" r="46" fill="#10211d" stroke="#4ee59b" stroke-width="2"/>
+    <text x="600" y="338" text-anchor="middle" fill="#4ee59b" font-size="16">PFN +</text><text x="600" y="363" text-anchor="middle" fill="#4ee59b" font-size="16">control flow</text>
+    <rect x="245" y="575" width="710" height="64" rx="12" fill="#211217" stroke="#ff647c"/>
+    <text x="600" y="615" text-anchor="middle" fill="#ff9bad" font-size="18">instrumented runs explain mechanics; fresh runs measure reliability</text>
+  </g>
+</svg>

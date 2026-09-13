@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">The vulnerable Linux code and the tools used to exploit it</title>
+  <desc id="desc">A dark terminal-style diagram with three clearly separated areas. The bug is in x86 Linux TLB switching and shootdown ordering. Scheduler and futex control, memfd secret, pagemap, allocator and page tables, and core pattern are exploit tools. QEMU, the host, and the outer jail were not targeted.</desc>
+  <rect width="1200" height="680" rx="22" fill="#08111f"/>
+  <rect x="24" y="24" width="1152" height="632" rx="16" fill="#0d1728" stroke="#334155" stroke-width="2"/>
+  <circle cx="52" cy="54" r="7" fill="#fb7185"/><circle cx="76" cy="54" r="7" fill="#fbbf24"/><circle cx="100" cy="54" r="7" fill="#4ade80"/>
+  <text x="128" y="61" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20">kernelCTF component map</text>
+  <rect x="54" y="96" width="1092" height="174" rx="14" fill="#25121c" stroke="#fb7185" stroke-width="3"/>
+  <text x="82" y="132" fill="#fb7185" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="23" font-weight="700">THE BUG</text>
+  <text x="82" y="174" fill="#f8fafc" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="26" font-weight="700">arch/x86/mm/tlb.c</text>
+  <text x="82" y="211" fill="#fecdd3" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20">address-space switch + shootdown ordering</text>
+  <text x="82" y="242" fill="#cbd5e1" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="17">Two CPUs can each believe the other one handled the flush.</text>
+  <rect x="54" y="292" width="1092" height="206" rx="14" fill="#10231f" stroke="#34d399" stroke-width="2"/>
+  <text x="82" y="330" fill="#34d399" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="23" font-weight="700">EXPLOIT TOOLS</text>
+  <g fill="#132f2a" stroke="#34d399"><rect x="82" y="354" width="188" height="100" rx="10"/><rect x="288" y="354" width="188" height="100" rx="10"/><rect x="494" y="354" width="188" height="100" rx="10"/><rect x="700" y="354" width="188" height="100" rx="10"/><rect x="906" y="354" width="212" height="100" rx="10"/></g>
+  <g fill="#d1fae5" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="17" text-anchor="middle"><text x="176" y="394">scheduler</text><text x="176" y="420">+ futex</text><text x="382" y="407">memfd_secret</text><text x="588" y="407">pagemap</text><text x="794" y="394">allocator</text><text x="794" y="420">+ PTE pages</text><text x="1012" y="407">core_pattern</text></g>
+  <text x="82" y="481" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="16">These components made the bug useful. They were not the vulnerable component.</text>
+  <rect x="54" y="520" width="1092" height="104" rx="14" fill="#121a2a" stroke="#64748b" stroke-width="2"/>
+  <text x="82" y="558" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="22" font-weight="700">NOT TARGETED</text>
+  <text x="82" y="598" fill="#cbd5e1" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="21">QEMU / Google host / outer NsJail</text>
+  <path d="M1090 564l24 24m0-24l-24 24" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+</svg>
