@@ -22,7 +22,7 @@ I wrote it up the way you are supposed to, with steps to reproduce, the exact re
 
 > At that point I was no longer sure whether I was reporting a vulnerability or auditioning for a Netflix documentary.
 
-![Netflix continue watching screen captioned: bug bounty triage, after the written report, the screenshots, the raw HTTP request and the reproduction steps](https://blog.himanshuanand.com/images/continue-watching.jpg)
+![Netflix continue watching screen captioned: bug bounty triage, after the written report, the screenshots, the raw HTTP request and the reproduction steps](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/continue-watching.jpg)
 *Bug bounty triage, after the written report, the screenshots, the raw HTTP request and the reproduction steps.*
 
 I am not telling that story because it was unusual but because it was completely ordinary and because the hours it consumed are the thing actually being traded here rather than the bug itself.
@@ -38,7 +38,7 @@ Over the years I have sent more than 50 vulnerability reports through HackerOne,
 | not applicable | most of the rest |
 | valid | 5 |
 
-![HackerOne reports dashboard filtered to Closed and Duplicate, showing the saved view holding twenty-three duplicate reports out of sixty-three total. The report list itself is redacted](https://blog.himanshuanand.com/images/h1-duplicates.png)
+![HackerOne reports dashboard filtered to Closed and Duplicate, showing the saved view holding twenty-three duplicate reports out of sixty-three total. The report list itself is redacted](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/h1-duplicates.png)
 *The same thing on HackerOne: a saved view filtered to Closed → Duplicate. Report list redacted; the count is the point.*
 
 Then there was 5 August, when I sent six reports to Google in a single day and every one of them came back as a duplicate, including three that I had assessed as critical.
@@ -47,7 +47,7 @@ Then there was 5 August, when I sent six reports to Google in a single day and e
 >
 > A duplicate verdict does not mean Google agreed with my severity rating, it means somebody else had already told them and the critical rating was my assessment rather than theirs. I am not claiming that I was robbed. I am claiming something considerably more boring and more important, which is that six pieces of genuine work produced nothing at all purely because of timing.
 
-![Google Bug Hunters dashboard showing six reports submitted to Google VRP on 5 August 2026, every one of them closed with the status Duplicate. Report titles and reporter identities are redacted](https://blog.himanshuanand.com/images/google-duplicates.png)
+![Google Bug Hunters dashboard showing six reports submitted to Google VRP on 5 August 2026, every one of them closed with the status Duplicate. Report titles and reporter identities are redacted](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/google-duplicates.png)
 *Six reports to Google VRP, submitted on 5 August 2026 and closed as Duplicate. Titles and other reporters' identities redacted.*
 
 Here is the part that people outside security always find strange when I explain it at a party. The bugs were real, the work was real and the hours came out of real evenings, yet the payment turned out to be the only theoretical component in the entire arrangement.
@@ -74,7 +74,7 @@ I did not usually wake up, pick a public programme and spend a week competing fo
 
 I am not alone in the discomfort either. LiveOverflow, one of the most widely watched security educators on the internet, put it like this back in 2021:
 
-![LiveOverflow tweet saying he is not a huge fan of bug bounties and criticises the exploitation of labor at scale, while still standing with HackerOne and the triagers](https://blog.himanshuanand.com/images/tweet-liveoverflow.png)
+![LiveOverflow tweet saying he is not a huge fan of bug bounties and criticises the exploitation of labor at scale, while still standing with HackerOne and the triagers](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/tweet-liveoverflow.png)
 *[LiveOverflow, 26 September 2021](https://x.com/LiveOverflow/status/1441939484535361537)*
 
 Read that second sentence carefully, because it is the honest part of the post. He criticises the labour model and defends the triagers in the same breath, which is possible because both things are true at the same time. Programmes can push the cost of searching onto unpaid strangers while those same programmes are being buried under garbage reports and neither of those facts cancels out the other.
@@ -105,7 +105,7 @@ The poster still says $1,000 while your actual business has quietly lost three q
 
 There is a second squeeze underneath the first one, which is that AI shortens the *finding* without shortening the proving, the writing, the screenshotting, the video, the back and forth with triage or the appeal you file when somebody closes your report as Not Applicable. Saving an hour on discovery does not help very much when you then spend three more hours explaining why deleting another user's data counts as a security problem.
 
-![Three Spider-Men pointing at each other, labelled three researchers, three AI subscriptions, one vulnerability and one bounty](https://blog.himanshuanand.com/images/spiderman-duplicate.jpg)
+![Three Spider-Men pointing at each other, labelled three researchers, three AI subscriptions, one vulnerability and one bounty](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/spiderman-duplicate.jpg)
 *Three researchers, three AI subscriptions, one vulnerability, one bounty.*
 
 ## "sounds like a you problem"
@@ -116,7 +116,7 @@ The easiest way to dismiss everything above is to assume that I am simply slow, 
 
 In April 2026 a triage engineer who goes by @d0rsky described exactly this pattern from the other side of the desk:
 
-![Tweet from triage engineer d0rsky describing a wave of duplicate reports arriving within days of any new vulnerability being discovered](https://blog.himanshuanand.com/images/tweet-d0rsky.png)
+![Tweet from triage engineer d0rsky describing a wave of duplicate reports arriving within days of any new vulnerability being discovered](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/tweet-d0rsky.png)
 *[@d0rsky, 5 April 2026](https://x.com/d0rsky/status/2040848736713126365)*
 
 X truncates that one, so here is the rest of it:
@@ -127,7 +127,7 @@ That last question is the one I would like CISOs to sit with and I will come bac
 
 A month after that @pyn3rd said the quiet part out loud, observing that AI keeps producing duplicate vulnerability reports over and over and has increased the likelihood of several people reporting the same thing. I replied with the joke that has been living rent free in my head ever since.
 
-![pyn3rd tweets that AI keeps producing duplicate vulnerability reports, attaching a HackerOne message closing a report as a duplicate. Himanshu Anand replies that all vulnerabilities are now race conditions](https://blog.himanshuanand.com/images/tweet-race-condition.png)
+![pyn3rd tweets that AI keeps producing duplicate vulnerability reports, attaching a HackerOne message closing a report as a duplicate. Himanshu Anand replies that all vulnerabilities are now race conditions](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/tweet-race-condition.png)
 *The whole argument in one screenshot. [@pyn3rd](https://x.com/pyn3rd/status/2057095914138087693) attached a real HackerOne closure notice, which is the same message I have now collected twenty-three times. [My reply](https://x.com/anand_himanshu/status/2057097135347106047), 20 May 2026.*
 
 That is where this post takes its title from. The longer I look at my own scoreboard the less it reads like a joke, because a race condition is what you get when the outcome depends on who arrives first rather than on what anybody actually did, which is now a perfectly fair description of how a bug report gets paid.
@@ -148,7 +148,7 @@ Now imagine a hundred smaller versions of that same thing, operated by people wh
 
 The bluntest evidence comes from curl, a piece of software that runs on billions of devices. On 26 January 2026 the maintainer Daniel Stenberg announced the end of its bug bounty:
 
-![Daniel Stenberg's blog post titled The end of the curl bug-bounty, dated 26 January 2026, with a photograph of a pile of money next to a sign reading NO MORE](https://blog.himanshuanand.com/images/curl-bounty-ends.png)
+![Daniel Stenberg's blog post titled The end of the curl bug-bounty, dated 26 January 2026, with a photograph of a pile of money next to a sign reading NO MORE](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/curl-bounty-ends.png)
 *"There is no longer a curl bug-bounty program. It officially stops on January 31, 2026." [daniel.haxx.se](https://daniel.haxx.se/blog/2026/01/26/the-end-of-the-curl-bug-bounty/), 26 January 2026.*
 
 This was not a programme that had failed, because over its lifetime it paid out more than $100,000 for 87 confirmed vulnerabilities. Then the signal to noise ratio collapsed underneath it:
@@ -248,7 +248,7 @@ In the end I asked for explicit permission to demonstrate it, received that perm
 
 Look at what that process actually was though. A written explanation of a destructive bug, from somebody who had already proven it, counted for less with the queue than a screen recording would and that was not because the writing was unclear but because video is how an overloaded queue converts "I do not follow this" into "fine, approved". The evidence format ended up substituting for understanding the bug.
 
-![A triage requirement reading: a video POC showing the full environment setup and flow and execution of your finding, and clearly showing the initial state versus what the actor was able to achieve](https://blog.himanshuanand.com/images/video-request-thread.png)
+![A triage requirement reading: a video POC showing the full environment setup and flow and execution of your finding, and clearly showing the initial state versus what the actor was able to achieve](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/video-request-thread.png)
 *The standing requirement: a video showing "the initial state vs what the actor was able to achieve" — even for a written, already-proven destructive bug.*
 
 ## what a wrong N/A actually costs a researcher
@@ -289,12 +289,12 @@ And here is the part your own economics should notice, because for that entire c
 
 Hacker News did not take that well, with the thread reaching 486 points and comments including "a $6500 bounty is insulting." This one was the most widely shared:
 
-![Hacker News comment calling the 6,500 dollar bounty beyond pathetic for a company valued near 1.2 trillion dollars that had just been breached with a complete potential source code leak](https://blog.himanshuanand.com/images/hn-6500-reaction.png)
+![Hacker News comment calling the 6,500 dollar bounty beyond pathetic for a company valued near 1.2 trillion dollars that had just been breached with a complete potential source code leak](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/hn-6500-reaction.png)
 *[Hacker News](https://news.ycombinator.com/item?id=49749976), 18 September 2026.*
 
 There is also a scope twist that will feel familiar to anyone reading this from the researcher's side of the desk, because OpenAI clarified where the money had come from:
 
-![Disclosure timeline entry dated 1 September 2026 reading OpenAI Rewarded 6,500 dollar Bounty and Marked Resolved, followed by an OpenAI comment clarifying that testing against the Discourse-hosted community.openai.com was explicitly excluded from the bug bounty program](https://blog.himanshuanand.com/images/openai-6500-scope.png)
+![Disclosure timeline entry dated 1 September 2026 reading OpenAI Rewarded 6,500 dollar Bounty and Marked Resolved, followed by an OpenAI comment clarifying that testing against the Discourse-hosted community.openai.com was explicitly excluded from the bug bounty program](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/openai-6500-scope.png)
 *From the disclosure timeline in [Hacktron's write-up](https://hacktron.ai/blog/hacking-openai), 1 September 2026.*
 
 Read that carefully, because it is not villainy at all. It is a programme owner correctly declining to pay for testing against somebody else's hosted service, which they had no authority to authorise in the first place. The rule is entirely defensible.
@@ -305,7 +305,7 @@ It is also the exact shape of the problem, since the half of the work that *demo
 
 And the $6,500 was not a one-off number. A fortnight later another researcher, Oliver Fish, posted the reward for a bug that handed out free access to OpenAI's paid models with no API key and no account at all:
 
-![Oliver Fish tweets that OpenAI paid 300 dollars for a bug giving free access to OpenAI's paid models with no API key or account, attaching the award notice titled Unauthenticated Sandbox Escape Enables Access to Internal OpenAI Responses API, and says there is zero reason to report anything else he finds to them](https://blog.himanshuanand.com/images/tweet-oliver-fish.png)
+![Oliver Fish tweets that OpenAI paid 300 dollars for a bug giving free access to OpenAI's paid models with no API key or account, attaching the award notice titled Unauthenticated Sandbox Escape Enables Access to Internal OpenAI Responses API, and says there is zero reason to report anything else he finds to them](https://blog.himanshuanand.com/images/all-vulnerabilities-are-now-race-conditions/tweet-oliver-fish.png)
 *"$300 for a bug that gives free access to OpenAI's paid models with no API key or account. Zero reason to report anything else I find to them." [@_Oliver_Fish](https://x.com/_Oliver_Fish/status/2107676642491629569), 7 October 2026.*
 
 That last sentence is the whole thing said in one line by somebody who had just lived it. So stack the outcomes up against each other and look at what the market actually paid for effort.
